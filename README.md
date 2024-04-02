@@ -1,24 +1,43 @@
-# README
+# JavaJam
+(javaは英語でコーヒーを意味するスラング、jamは音楽用語のジャムセッションから)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
 
-Things you may want to cover:
+### サイトテーマ
 
-* Ruby version
+美味しいドリップコーヒーのレシピをシェアするSNS
 
-* System dependencies
+### テーマを選んだ理由
 
-* Configuration
+コーヒーの美味しい淹れ方を簡単に探したり新たな方法を見つけたりできるアプリケーションが欲しいと思ったからです。<br>
+自分がハンドドリップでコーヒーを淹れることにハマった時に、ネット上には探せば無数にレシピがありましたがお店のWebサイトだったりYouTubeの動画だったり媒体が様々で、検索や管理が面倒でした。<br>
+JavaJamを制作して活用してもらうことで、お店の人、有名なバリスタ、また今から新しくドリップコーヒー生活を始める素人の人も自分流の美味しいドリップコーヒーのレシピがシェアできて参考にしてもらえると思い制作を決意しました。<br>
+新しくドリップコーヒー生活を始める素人にも優しいサイトとなるように、使う道具の紹介も考えています。<br>
+ドリップコーヒーのレシピや使う道具にはレビュー機能も付け加えて、JavaJamを使う人が「わかりやすく」、「楽しいサイト」を構築したいと考えています。
 
-* Database creation
+### ターゲットユーザ
 
-* Database initialization
+- コーヒーが好きな人
+- ドリップコーヒーに初めて挑戦する人
+- 喫茶店や珈琲店でもっと美味しいドリップコーヒーを提供できるように日々模索している店員の人
 
-* How to run the test suite
+### 主な利用シーン
 
-* Services (job queues, cache servers, search engines, etc.)
+- ドリップコーヒーを淹れる方法を調べるとき
+- ドリップコーヒーグッズやドリップコーヒーの様々な情報を調べるとき
 
-* Deployment instructions
+## 設計書
 
-* ...
+テーマを設定・提出する時点では不要です
+
+## 開発環境
+
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JS ライブラリ：jQuery
+- IDE：Cloud9
+  ​
+
+## 使用素材
+未定
