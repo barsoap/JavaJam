@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  #usersのルーティング
+  #usersのルーティング(URL変えない場合)
   scope module: :users do
     root to: 'homes#top'
   end
+
   # devise_for :admins
   # devise_for :users
   # 顧客用
