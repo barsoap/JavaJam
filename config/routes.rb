@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
+  # namespace :users do
+  #   get 'users/edit'
+  #   get 'users/show'
+  # end
   #usersのルーティング(URL変えない場合)
   scope module: :users do
     root to: 'homes#top'
+    resources :users, only: [:edit, :show]
+    # get 'users/:id' => 'users#users#show'
   end
 
   # devise_for :admins

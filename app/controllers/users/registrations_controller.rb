@@ -65,7 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-   #ストロングパラメーターを設定(customerカラムの内容を許可する
+   #ストロングパラメーターを設定(customerカラムの内容を許可する)
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
