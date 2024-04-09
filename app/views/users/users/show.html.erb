@@ -1,8 +1,31 @@
-<div class="container">
+<div class="container py-5">
   <div class="row">
 
-    <div class="col">
-      ユーザーページ
+    <div class="col-md-3 left-side py-3"><!--左側のユーザー情報-->
+      <div><%= image_tag @user.get_profile_image(100, 100), class: 'rounded-circle img-fluid d-block mx-auto' %></div>
+      <div class="text-center mt-3 font-weight-bold"><%= @user.name %></div>
+      <div class="text-center mt-3"><%= simple_format(@user.profile, sanitize: true, class: 'm-0') %></div>
+      <div class="row mt-3">
+        <div class="col-md-8 mx-auto">
+          <%= link_to 'ユーザー情報編集', edit_user_path(@user), class: "btn btn-secondary btn-block" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 offset-1"><!--右側のレシピ、ノート、アイテム、ブックマーク(レシピ、アイテム)一覧-->
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">レシピ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">ノート</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">アイテム</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">ブックマーク</a>
+        </li>
+      </ul>
     </div>
 
   </div>

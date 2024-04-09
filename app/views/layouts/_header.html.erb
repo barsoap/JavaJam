@@ -11,7 +11,7 @@
         <li><%= link_to '新規登録', new_user_registration_path, class: 'text-decoration-none text-ivory' %></li>
         <li><%= link_to 'ログイン', new_user_session_path, class: 'text-decoration-none text-ivory' %></li>
       <% else %>
-        <li><%= link_to 'マイページ', user_path, class: 'text-decoration-none text-ivory' %></li>
+        <li><%= link_to 'マイページ', user_path(current_user), class: 'text-decoration-none text-ivory' %></li>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'text-decoration-none text-ivory' %></li>
       <% end %>
     </ul>

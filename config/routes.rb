@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   #usersのルーティング(URL変えない場合)
   scope module: :users do
     root to: 'homes#top'
-    resources :users, only: [:edit, :show]
+    resources :users, only: [:edit, :show, :update]
     # get 'users/:id' => 'users#users#show'
   end
 
