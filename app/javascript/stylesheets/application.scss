@@ -29,7 +29,7 @@ header {
 
 .logo {
   height: auto;
-  width: 100px;
+  width: 80px;
 }
 
 // メニュー構成
@@ -57,5 +57,12 @@ footer {
 }
 //ユーザー詳細
 .left-side {
-  background-color: #C1B0A0;
+  background-color: #E8DACA;
+}
+
+// トップスライダー
+.top-slider-img {
+  width: 100%;
+  height: calc((100vh - 150px - 56px) / 2);
+  object-fit: cover;
 }

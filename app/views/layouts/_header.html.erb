@@ -1,6 +1,6 @@
 <header class="position-fixed w-100">
   <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
-    <%= image_tag 'logo.png', class: 'logo' %>
+    <%= image_tag 'logo_white_s.png', class: 'logo' %>
     <ul class="d-flex list-unstyled m-0 menu__basic">
       <li><%= link_to 'レシピ', root_path, class: 'text-decoration-none text-ivory' %></li>
       <li><%= link_to '道具', root_path, class: 'text-decoration-none text-ivory' %></li>
@@ -18,7 +18,7 @@
   </nav>
 </header>
 <% if notice %>
-  <div class="alert alert-success" role="alert">
+  <div class="alert alert-success m-0" role="alert">
     <div class="container">
       <%= notice %>
     </div>
@@ -26,7 +26,7 @@
 <% end %>
 
 <% if alert %>
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger m-0" role="alert">
     <div class="container">
       <%= alert %>
     </div>

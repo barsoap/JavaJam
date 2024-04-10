@@ -1,26 +1,98 @@
 <div class="container py-5">
-  <div class="row">
+  <div class="row d-flex justify-content-center">
 
-    <div class="col-md-8 mx-auto">
-      <h3>ユーザー情報編集</h3>
-      <div class="form">
+    <div class="col-md-8">
+      <h3 class="text-center pb-5">ユーザー情報編集</h3>
+      <!--<div class="form text-center align-center">-->
         <%= form_with model: @user, url: user_path, method: :patch do |f| %>
           <div class="form-group">
-            <%= f.label :name %>
-            <%= f.text_field :name %>
+            <div class="row">
+              <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+                <%= f.label :email, 'メールアドレス', class: 'm-0' %>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :email, class: 'form-control' %>
+              </div>
+            </div>
           </div>
           <div class="form-group">
-            <%= f.label :profile %>
-            <%= f.text_field :profile %>
+            <div class="row">
+              <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+                <%= f.label :profile_image, 'プロフィール画像', class: 'm-0' %>
+              </div>
+              <div class="col-md-8">
+                <div class="custom-file">
+                  <%= f.file_field :profile_image, accept: "image/*", class: 'custom-file-input' %>
+                  <%= f.label :profile_image, '選択してください', class: 'custom-file-label' %>
+                </div>
+              </div>
+            </div>
+
           </div>
           <div class="form-group">
-            <%= f.label :email %>
-            <%= f.text_field :email %>
+            <div class="row">
+              <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+                <%= f.label :name, 'ユーザー名', class: 'm-0' %>
+
+              </div>
+              <div class="col-md-8">
+                <%= f.text_field :name, class: 'form-control' %>
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">変更する</button>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-start">
+                <%= f.label :profile, 'プロフィール', class: 'm-0' %>
+              </div>
+              <div class="col-md-8">
+                <%= f.text_area :profile, class: 'form-control', rows: 10 %>
+                <div class="text-right text-black-50">
+                  <small><span class="text-right" id="show-count">0</span>/120文字</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row mt-3">
+              <div class="col-md-8 offset-0 offset-md-4">
+                <button type="submit" class="btn btn-primary btn-block">変更する</button>
+              </div>
+            </div>
+          </div>
         <% end %>
+      <!--</div>-->
+      <div class="row mt-5">
+        <div class="col-md-4 offset-0 offset-md-8">
+          <%= link_to '退会する',
+                      withdraw_users_path,
+                      method: :patch,
+                      class: 'btn btn-danger btn-block',
+                      data: { confirm: "本当に退会しますか？" }
+          %>
+        </div>
       </div>
     </div>
 
   </div>
 </div>
+
+<script>
+  // ファイルフィールド
+  $(document).on('change', '.custom-file-input', function (event) {
+    $(this).next('.custom-file-label').html(event.target.files[0].name);
+  })
+
+  // 文字数カウント
+  $(function(){
+    textCount();
+    $('#user_profile').on('input', function(){
+      textCount();
+    });
+  });
+
+  function textCount() {
+    var count = $('#user_profile').val().length;
+    $('#show-count').text(count);
+  }
+</script>
