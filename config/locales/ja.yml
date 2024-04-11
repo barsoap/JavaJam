@@ -1,6 +1,13 @@
 ---
 ja:
   activerecord:
+
+    attributes: #エラーメッセージの主語日本語化
+      user:
+        name: "ユーザー名"
+        email: "メールアドレス"
+        profile: "プロフィール"
+
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
