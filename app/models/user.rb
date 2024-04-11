@@ -4,12 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
-  # # is_deletedがfalseならtrueを返すようにしている
-  # def active_for_authentication?
-  #   super && (is_deleted == false)
-  # end
-
-
   has_one_attached :profile_image
 
   def get_profile_image(width, height)
@@ -27,4 +21,7 @@ class User < ApplicationRecord
   def inactive_message
     is_active? ? super : :not_active
   end
+
+  validates :name, presence: true
+  validates :profile, length: { maximum: 120}
 end
