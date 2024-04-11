@@ -1,0 +1,47 @@
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+       <%= image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'top-slider-img' %>
+    </div>
+    <div class="swiper-slide">
+       <%= image_tag 'top/ben-kolde--sKBWdCyBLg-unsplash.jpg', class: 'top-slider-img' %>
+    </div>
+    <div class="swiper-slide">
+       <%= image_tag 'top/jonathan-borba-21tOEaJPM_o-unsplash -sizeChange.jpg', class: 'top-slider-img' %>
+    </div>
+    <div class="swiper-slide">
+       <%= image_tag 'top/nathan-dumlao-6VhPY27jdps-unsplash.jpg', class: 'top-slider-img' %>
+    </div>
+    <div class="swiper-slide">
+       <%= image_tag 'top/rodrigo-flores-sn87TQ_o7zs-unsplash.jpg', class: 'top-slider-img' %>
+    </div>
+    <div class="swiper-slide">
+       <%= image_tag 'top/tyler-nix-72VzVRVnWLE-unsplash.jpg', class: 'top-slider-img' %>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
+  <h2>JavaJam</h2>
+  <p>美味しいドリップコーヒーのレシピをシェアしたり、ドリップコーヒーを愉しむ人たちが交流できたりするSNS</p>
+</div>
+
+<script>
+  // Swiperを実行(初期化)
+  $(document).on('turbolinks:load', function() {
+    var swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      speed: 500,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
+    });
+  });
+</script>
