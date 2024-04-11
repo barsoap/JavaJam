@@ -1,0 +1,68 @@
+$enable-rounded: false;
+$theme-colors: (
+  "primary": #F5B73B,
+  "secondary": #4B4843,
+  "warning": #FFA252,
+  "info": #756B57,
+  "success": #78895C,
+  "danger": #F4485C
+);
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, body {
+  font-family: "Raleway", "M PLUS 1p", sans-serif;
+}
+
+body {
+  padding-top: 150px;
+}
+
+// ヘッダー構成
+header {
+  height: 150px;
+  background-color: #1A1717;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.logo {
+  height: auto;
+  width: 80px;
+}
+
+// メニュー構成
+nav > ul > li {
+  margin-right: 15px;
+}
+
+nav > ul > li:last-child {
+  margin-right: 0;
+}
+
+.menu__basic {
+  font-size: calc(15px + .5vw);
+}
+
+.menu__login {
+  font-size: calc(10px + .3vw);
+}
+.text-ivory {
+  color: #F9F6EC;
+}
+// フッター
+footer {
+  background-color: #1A1717;
+}
+//ユーザー詳細
+.left-side {
+  background-color: #E8DACA;
+}
+
+// トップスライダー
+.top-slider-img {
+  width: 100%;
+  height: calc((100vh - 150px - 56px) / 2);
+  object-fit: cover;
+}
