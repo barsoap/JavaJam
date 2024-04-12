@@ -31,7 +31,10 @@ JavaJamを制作して活用してもらうことで、お店の人、有名な�
 
 ## 設計書
 
-テーマを設定・提出する時点では不要です
+UIFlows: https://app.diagrams.net/#G1XD9sppyvtEMXjX-YekynchviQ4_dQW5t#%7B%22pageId%22%3A%22jlBfglFuGHINdxVBMgD7%22%7D<br>
+ER図: https://app.diagrams.net/#G1WWjoOr6_vh3bl12WWb4xd0-Gnwo1OH2z#%7B%22pageId%22%3A%22s8ZE_iBRfCTQEpTrYYBZ%22%7D<br>
+テーブル定義書: https://docs.google.com/spreadsheets/d/1WzbHjECF2qo-HLU6K5Vq3Qlb_38EHTrmazEs71z370A/edit#gid=1044500859<br>
+アプリケーション詳細設計書: https://docs.google.com/spreadsheets/d/1YNdWAu1vLhVKenk0ZvVlnjCAmHQA5MsBbNPGVfg542U/edit#gid=549108681
 
 ## 開発環境
 
