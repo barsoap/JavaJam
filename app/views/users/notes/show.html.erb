@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col">
+      <% @note.each do |note| %>
+          <%= note.title %>
+          <%= note.contents %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

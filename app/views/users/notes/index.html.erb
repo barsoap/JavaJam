@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col">
+      <h3>ノート一覧</h3>
+
+      <% @notes.each do |note| %>
+        <a href="<%= note_path(note.id) %>">
+          <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= note.title %></h5>
+              <p class="card-text"><%= note.contents %></p>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
