@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    # get 'users/:id' => 'users#users#show'
+    resources :recipes, only: [:new, :index, :show, :edit]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
