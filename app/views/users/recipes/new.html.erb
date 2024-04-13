@@ -1,2 +1,59 @@
-<h1>Recipes#new</h1>
-<p>Find me in app/views/recipes/new.html.erb</p>
+<div class="container py-5">
+  <div class="row d-flex justify-content-center">
+
+    <div class="col-md-8">
+      <h3 class="text-center pb-5">レシピ投稿</h3>
+
+      <div class="text-center bg-primary"><!--エラー文-->
+        <% if @recipe.errors.any? %>
+          <ul class="list-unstyled">
+            <% @recipe.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <%= form_with model: @recipe, url: recipes_path, method: :post do |f| %>
+        <div class="form_group"><!--タイトル-->
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :title, 'タイトル', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :title, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="form_group"><!--コンテンツ-->
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :contents, 'レシピの内容', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :contents, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="form_group"><!--テンプレ-->
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+
+            </div>
+            <div class="col-md-8">
+
+            </div>
+          </div>
+        </div>
+        <div class="form_group">
+          <div class="row mt-3">
+            <div class="col-md-8 offset-0 offset-md-4">
+              <button type="submit" class="btn btn-primary btn-block">投稿する</button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

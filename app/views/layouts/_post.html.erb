@@ -1,0 +1,19 @@
+<button id="btn">投稿する</button>
+<p class="balloon">
+  <span>
+    <%= link_to 'レシピを投稿する', new_recipe_path %><br>
+    <%= link_to 'アイテムを投稿する' %><br>
+    <%= link_to 'ノートを投稿する' %>
+  </span>
+</p>
+
+<script>
+  $(function() {
+  $(".balloon").after().hide();
+  $("#btn").click(function() {
+  $(".balloon").toggleClass("open").slideToggle("normal", function() {
+      $("body,html").scrollTop();
+    });
+  });
+});
+</script>

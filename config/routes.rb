@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    resources :recipes, only: [:new, :index, :show, :edit]
+    resources :recipes, only: [:new, :create, :index, :show, :edit, :update]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
