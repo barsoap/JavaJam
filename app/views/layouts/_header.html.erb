@@ -1,6 +1,6 @@
 <header class="position-fixed w-100">
   <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
-    <%= image_tag 'logo_white_s.png', class: 'logo' %>
+    <a href="<%= root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
     <ul class="d-flex list-unstyled m-0 menu__basic">
       <li><%= link_to 'レシピ', recipes_path, class: 'text-decoration-none text-ivory' %></li>
       <li><%= link_to '道具', root_path, class: 'text-decoration-none text-ivory' %></li>
