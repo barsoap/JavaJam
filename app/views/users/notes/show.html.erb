@@ -1,0 +1,21 @@
+<div class="container py-5">
+  <div class="row m-0 d-flex flex-content-center">
+
+    <div class="col mx-auto">
+      <div class="row align-middle">
+        <a href="<%= user_path(@note.user) %>">
+          <%= image_tag @note.user.get_profile_image(50,50), class: 'rounded-circle img-fluid d-block'%>
+        </a>
+        <h3 class="m-0"><%= @note.title %></h3>
+        <% if @note.user_id == current_user.id %>
+          <%= link_to '編集する', edit_note_path(@note), class: 'btn btn-outline-success' %>
+          <%= link_to '削除する', note_path(@note), method: :delete, class: 'btn btn-outline-danger', data: { confirm: '本当に削除しますか？'} %>
+        <% end %>
+      </div>
+      <div class="row pt-5">
+        <%= simple_format(@note.contents, sanitize: true, class: 'm-0') %>
+      </div>
+    </div>
+
+  </div>
+</div>

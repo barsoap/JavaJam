@@ -13,8 +13,23 @@ class Users::RecipesController < ApplicationController
   end
 
   def create
-    if @recipe.save(recipe_params)
-      redirect_to recipee_path
+    @recipe = Recipe.new(recipe_params)
+    @recipe.user_id = current_user.id
+    if @recipe.save
+      redirect_to recipe_path(@recipe)
+    else
+      render :edit
+    end
+  end
+
+  def edit
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id])
+    if @recipe.update
+      redirect_to note_path(@recipe)
     else
       render :edit
     end

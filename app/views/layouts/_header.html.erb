@@ -4,7 +4,7 @@
     <ul class="d-flex list-unstyled m-0 menu__basic">
       <li><%= link_to 'レシピ', recipes_path, class: 'text-decoration-none text-ivory' %></li>
       <li><%= link_to '道具', root_path, class: 'text-decoration-none text-ivory' %></li>
-      <li><%= link_to 'ノート', root_path, class: 'text-decoration-none text-ivory' %></li>
+      <li><%= link_to 'ノート', notes_path, class: 'text-decoration-none text-ivory' %></li>
     </ul>
     <ul class="d-flex list-unstyled m-0 menu__login">
       <% unless user_signed_in? %>
