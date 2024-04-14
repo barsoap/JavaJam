@@ -9,7 +9,7 @@ class Users::NotesController < ApplicationController
     if @note.save
       redirect_to note_path(@note)
     else
-      render note_path(@note)
+      render :new
     end
   end
 

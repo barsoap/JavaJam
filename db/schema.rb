@@ -53,6 +53,10 @@ ActiveRecord::Schema.define(version: 2024_04_14_091310) do
   end
 
   create_table "equipment", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.text "description", null: false
+    t.float "evaluation", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     end
     resources :recipes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :notes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-    resources :equipment, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :equipments, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
