@@ -23,6 +23,9 @@ class Users::NotesController < ApplicationController
 
   def edit
     @note = Note.find(params[:id])
+    unless @note.user_id == current_user.id
+      redirect_to note_path(@note)
+    end
   end
 
   def update
@@ -37,7 +40,7 @@ class Users::NotesController < ApplicationController
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
-    redirct_to notes_path
+    redirect_to notes_path
   end
 
   private
