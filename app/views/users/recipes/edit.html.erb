@@ -1,2 +1,59 @@
-<h1>Recipes#edit</h1>
-<p>Find me in app/views/recipes/edit.html.erb</p>
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col">
+      <h3 class="text-center pb-5">レシピ編集</h3>
+
+      <div class="text-center bg-primary">
+        <% if @recipe.errors.any? %>
+          <ul class="list-unstyled">
+            <% @recipe.errors.full_messages.each do |recipe| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <%= form_with model: @recipe, url: recipe_path(@recipe), method: :patch do |f| %>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :title, 'タイトル', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :title, class: 'form-control'%>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :contents, 'レシピ', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_area :contents, class: 'form-control', rows: 20 %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group"><!--評価-->
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :evaluation, '評価', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :evaluation, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <div class="row mt-3">
+              <div class="col-md-8 offset-0 offset-md-4">
+                <button type="submit" class="btn btn-primary btn-block">内容を変更する</button>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

@@ -30,7 +30,7 @@ class Users::EquipmentsController < ApplicationController
 
   def update
     @equipment = Equipment.find(params[:id])
-    if @equipment.save(equipment_params)
+    if @equipment.update(equipment_params)
       redirect_to equipment_path(@equipment)
     else
       render :edit
@@ -40,7 +40,7 @@ class Users::EquipmentsController < ApplicationController
   def destroy
     @equipment = Equipment.find(params[:id])
     @equipment.destroy
-    redirect_to equipment_index_path
+    redirect_to equipments_path
   end
 
   private

@@ -1,2 +1,59 @@
-<h1>Users::Equipments#edit</h1>
-<p>Find me in app/views/users/equipments/edit.html.erb</p>
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col">
+      <h3 class="text-center pb-5">アイテム編集</h3>
+
+      <div class="text-center bg-primary">
+        <% if @equipment.errors.any? %>
+          <ul class="list-unstyled">
+            <% @equipment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <%= form_with model: @equipment, url: equipment_path(@equipment), method: :patch do |f| %>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :name, 'アイテム', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :name, class: 'form-control'%>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :description, '説明', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_area :description, class: 'form-control', rows: 20 %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group"><!--評価-->
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :evaluation, '評価', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :evaluation, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <div class="row mt-3">
+              <div class="col-md-8 offset-0 offset-md-4">
+                <button type="submit" class="btn btn-primary btn-block">内容を変更する</button>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
