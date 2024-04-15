@@ -9,7 +9,7 @@ class Users::NotesController < ApplicationController
     if @note.save
       redirect_to note_path(@note)
     else
-      render note_path(@note)
+      render :new
     end
   end
 
@@ -45,6 +45,6 @@ class Users::NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:title, :contents)
+    params.require(:note).permit(:user_id, :title, :contents)
   end
 end

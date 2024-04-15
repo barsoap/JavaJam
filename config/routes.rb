@@ -15,11 +15,6 @@ Rails.application.routes.draw do
     sessions: "admins/sessions"
   }
 
-    # namespace :users do
-  #   get 'users/edit'
-  #   get 'users/show'
-  # end
-  #usersのルーティング(URL変えない場合)
   scope module: :users do
     root to: 'homes#top'
     # 論理削除用のルーティング
@@ -31,6 +26,7 @@ Rails.application.routes.draw do
     end
     resources :recipes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :notes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :equipments, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
