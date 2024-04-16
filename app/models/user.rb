@@ -26,6 +26,18 @@ class User < ApplicationRecord
     is_active? ? super : :not_active
   end
 
+  def self.search_for(content,method) #検索メソッド
+    if method == 'perfect'
+      User.where(name: content)
+    elsif method == 'forward'
+      User.where('name LIKE?', content + '%')
+    elsif method == 'backword'
+      User.where('name LIKE ?', '%' + content)
+    else
+      User.where('name LIKE ?', '%' + content + '%')
+    end
+  end
+
   validates :name, presence: true
   validates :profile, length: { maximum: 120}
 end
