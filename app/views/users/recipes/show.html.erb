@@ -6,20 +6,77 @@
       <%= link_to (image_tag @recipe.user.get_profile_image(50,50), class: 'rounded-circle d-block'), user_path(@recipe.user)%>
       <span class="ml-3"><%= @recipe.user.name %></span>
     </div>
-
-    <% if user_signed_in? && @recipe.user_id == current_user.id %>
-      <div class="mt-3 mt-md-0">
+    <div class="mt-3 mt-md-0">
+      <% if user_signed_in? && @recipe.user_id == current_user.id %>
         <%= link_to '編集する', edit_recipe_path(@recipe), class: 'btn btn-outline-success' %>
-        <%= link_to '削除する', recipe_path(@recipe), method: :delete, class: 'btn btn-outline-danger', data: { confirm: '本当に削除しますか？'} %>
-      </div>
-    <% end %>
+        <%= link_to '削除する', recipe_path(@recipe), method: :delete, class: 'btn btn-outline-danger mr-3', data: { confirm: '本当に削除しますか？'} %>
+      <% end %>
+      <span id="evaluation"></span>
+    </div>
   </div>
-  <div class="d-flex justify-content-end mt-3">評価：<%= @recipe.evaluation %></div>
 
   <%= image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid my-3' %>
 
   <%= simple_format(@recipe.contents, sanitize: true, class: 'm-0') %>
 
-  <%= render 'layouts/post' %>
+  <% if @recipe.recipe_processes.nil? %>
+    <h3 class="mt-3">淹れ方</h3>
+  <% end %>
+  <% @recipe.recipe_processes.each do |rp| %>
+    <div class="mt-3">
+      <div class="row">
+        <div class="col-md-3">
+          <% if rp.recipe_process_image.attached? %>
+            <%= image_tag rp.recipe_process_image, class: 'recipe-processes__img' %>
+          <% else %>
+            <%= image_tag 'top/tyler-nix-72VzVRVnWLE-unsplash.jpg', class: 'recipe-processes__img' %>
+          <% end %>
+        </div>
+        <div class="col-md-9">
+          <h5 class="m-0"><%= rp.process %></h5>
+          <% unless rp.description.nil? %>
+            <div>
+              <%= simple_format(rp.description, sanitize: true, class: 'm-0') %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
+  <!-- コメント一覧-->
+  <% @recipe.recipe_comments.each do |comment| %>
+    <%= link_to (image_tag comment.user.get_profile_image(40,40)), user_path(comment.user_id) %>
+    <%= comment.contents %>
+    <% if comment.user == current_user %>
+      <%= link_to '削除する', recipe_recipe_comment_path(comment.recipe.id, comment.id), method: :delete %>
+    <% end %>
+  <% end %>
+
+  <!--コメント投稿-->
+  <%= form_with model:[@recipe, @recipe_comment] do |f| %>
+    <div class="form-group">
+      <%= f.text_area :contents, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit '送信する', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
 </div>
+
+<script>
+  $(document).on('turbolinks:load', function() {
+    let elem = document.querySelector('#evaluation');
+    if (elem == null) return;
+
+    elem.innerHTML = ""
+    raty(elem, {
+      starOn: "<%= asset_path('raty/star-on.png') %>",
+      starOff: "<%= asset_path('raty/star-off.png') %>",
+      starHalf: "<%= asset_path('raty/star-half.png') %>",
+      score: "<%= @recipe.evaluation %>",
+      half: true,
+      readOnly: true
+    });
+  });
+</script>

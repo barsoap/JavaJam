@@ -18,6 +18,7 @@
     <main class="flex-grow-1">
       <%= yield %>
     </main>
+    <%= render 'layouts/post' unless action_name == 'new' || action_name == 'edit' %>
     <%= render 'layouts/footer' %>
   </body>
 </html>

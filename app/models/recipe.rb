@@ -3,6 +3,10 @@ class Recipe < ApplicationRecord
   has_one_attached :recipe_image
 
   belongs_to :user
+  has_many :recipe_processes, dependent: :destroy
+  has_many :recipe_comments, dependent: :destroy
+
+  accepts_nested_attributes_for :recipe_processes, reject_if: :all_blank, allow_destroy: true
 
   def self.search_for(content,method) #検索メソッド
     if method == 'perfect'
