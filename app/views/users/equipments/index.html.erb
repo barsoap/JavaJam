@@ -1,20 +1,7 @@
 <div class="container py-5">
   <h3 class="mb-3">アイテム一覧</h3>
-  <div class="row">
-    <% @equipments.each do |equipment| %>
-      <div class="col-md-6 col-lg-4 mb-3">
-        <!--<a href="<%= equipment_path(equipment.id) %>">-->
-          <div class="card">
-            <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), equipment_path(equipment.id) %>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to equipment.name.truncate(10), equipment_path(equipment.id) %></h5>
-              <p class="card-text"><%= equipment.description.truncate(20) %></p>
-            </div>
-          </div>
-        <!--</a>-->
-      </div>
-    <% end %>
-  </div>
+
+    <%= render 'index', equipments: @equipments %>
 
   <%= render 'layouts/post' %>
 

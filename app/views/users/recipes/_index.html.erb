@@ -1,0 +1,16 @@
+<div class="row">
+    <% recipes.each do |recipe| %>
+      <div class="col-md-6 col-lg-4 mb-3">
+        <!--<a href="<%= recipe_path(recipe.id) %>">-->
+          <div class="card">
+            <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %></h5>
+              <p class="card-text"><%= recipe.contents.truncate(20) %></p>
+              <p class="card-text"><%= recipe.evaluation %></p>
+            </div>
+          </div>
+        <!--</a>-->
+      </div>
+    <% end %>
+  </div>

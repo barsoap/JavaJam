@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :recipes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :notes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :equipments, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    get "/search", to: "searchs#search"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
