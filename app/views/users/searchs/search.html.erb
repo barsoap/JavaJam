@@ -9,7 +9,7 @@
       <%= render 'users/recipes/index', recipes: @records %>
     <% elsif @model == 'equipment' %>
       <h3 class="mb-3">アイテム検索結果："<%= @content %>"</h3>
-      <%= render 'users/equipment/index', equipments: @records %>
+      <%= render 'users/equipments/index', equipments: @records %>
     <% else %>
       <h3 class="mb-3">ノート一覧："<%= @content %>"</h3>
       <!--< unless @records = nil %>-->
