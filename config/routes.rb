@@ -24,7 +24,9 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    resources :recipes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :recipes, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :recipe_comments, only:[:create, :destroy]
+    end
     resources :notes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     resources :equipments, only: [:new, :create, :index, :show, :edit, :update, :destroy]
     get "/search", to: "searchs#search"

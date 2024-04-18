@@ -15,6 +15,7 @@
       </div>
 
       <%= form_with model: @recipe, url: recipe_path(@recipe), method: :patch do |f| %>
+        <!--レシピタイトル-->
         <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
@@ -25,35 +26,68 @@
             </div>
           </div>
         </div>
+        <!--コンテンツ(レシピの内容)-->
         <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
               <%= f.label :contents, 'レシピ', class: 'm-0' %>
             </div>
             <div class="col-md-8">
-              <%= f.text_area :contents, class: 'form-control', rows: 20 %>
+              <%= f.text_area :contents, class: 'form-control', rows: 10 %>
             </div>
           </div>
         </div>
-        <div class="form-group"><!--評価-->
+        <!--評価-->
+        <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
               <%= f.label :evaluation, '評価', class: 'm-0' %>
             </div>
-            <div class="col-md-8">
-              <%= f.text_field :evaluation, class: 'form-control' %>
+            <div class="col-md-8"><!--星の画像のところ-->
+              <span id="evaluation"></span>
             </div>
           </div>
         </div>
+        <!--手順(cocoon)-->
+        <div class="form-group text-right">
+          <%= link_to_add_association '手順追加',
+                                      f,
+                                      :recipe_processes,
+                                      render_options: {
+                                        locals: {
+                                          'recipe_process_firlds', recipe_process: @recipe.recipe_process
+                                        }
+                                      }
+                                      class: 'btn btn-secondary'
+                                      %>
+        </div>
+        <!--変更ボタン-->
         <div class="form-group">
-            <div class="row mt-3">
-              <div class="col-md-8 offset-0 offset-md-4">
-                <button type="submit" class="btn btn-primary btn-block">内容を変更する</button>
-              </div>
+          <div class="row mt-3">
+            <div class="col-md-8 offset-0 offset-md-4">
+              <button type="submit" class="btn btn-primary btn-block">内容を変更する</button>
             </div>
           </div>
+        </div>
       <% end %>
     </div>
-
   </div>
 </div>
+
+<script>
+//ratyの星
+  $(document).on('turbolinks:load', function() {
+    let elem = document.querySelector('#evaluation');
+    if (elem == null) return;
+
+    elem.innerHTML = ""
+    raty(elem, {
+      starOn: "<%= asset_path('raty/star-on.png') %>",
+      starOff: "<%= asset_path('raty/star-off.png') %>",
+      starHalf: "<%= asset_path('raty/star-half.png') %>",
+      scoreName: "recipe[evaluation]",
+      score: "<%= @recipe.evaluation %>",
+      half: true
+    });
+  });
+</script>

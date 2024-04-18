@@ -18,6 +18,15 @@ import 'swiper/swiper-bundle.css';  //Swiper
 
 window.Swiper = Swiper;
 
+import Raty from "./raty.js" //raty
+window.raty = function(elem,opt) {
+  let raty =  new Raty(elem,opt)
+  raty.init();
+  return raty;
+}
+
+require("@nathanvda/cocoon") //cocoon
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

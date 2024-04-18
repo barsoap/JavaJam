@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :equipments, dependent: :destroy
+  has_many :recipe_comments, dependent: :destroy
 
   has_one_attached :profile_image
 

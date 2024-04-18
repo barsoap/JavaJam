@@ -15,7 +15,8 @@
       </div>
 
       <%= form_with model: @recipe, url: recipes_path, method: :post do |f| %>
-        <div class="form_group"><!--タイトル-->
+      <!--レシピタイトル-->
+        <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
               <%= f.label :title, 'タイトル', class: 'm-0' %>
@@ -25,27 +26,38 @@
             </div>
           </div>
         </div>
-        <div class="form_group"><!--コンテンツ-->
+        <!--コンテンツ(レシピの内容)-->
+        <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
               <%= f.label :contents, 'レシピの内容', class: 'm-0' %>
             </div>
             <div class="col-md-8">
-              <%= f.text_field :contents, class: 'form-control' %>
+              <%= f.text_area :contents, class: 'form-control', rows: 3, placeholder: "コメントを入力" %>
             </div>
           </div>
         </div>
-        <div class="form_group"><!--テンプレ-->
+        <!--評価-->
+        <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
               <%= f.label :evaluation, '評価', class: 'm-0' %>
             </div>
             <div class="col-md-8">
-              <%= f.text_field :evaluation, class: 'form-control' %>
+              <span id="evaluation"></span>
             </div>
           </div>
         </div>
-        <div class="form_group">
+        <!--手順(cocoon)-->
+        <div class="form-group text-right">
+          <%= link_to_add_association '手順追加',
+                                      f,
+                                      :recipe_processes,
+                                      class: 'btn btn-secondary'
+                                      %>
+        </div>
+        <!--投稿ボタン-->
+        <div class="form-group">
           <div class="row mt-3">
             <div class="col-md-8 offset-0 offset-md-4">
               <button type="submit" class="btn btn-primary btn-block">投稿する</button>
@@ -54,6 +66,22 @@
         </div>
       <% end %>
     </div>
-
   </div>
 </div>
+
+<script>
+//ratyの星
+  $(document).on('turbolinks:load', function() {
+    let elem = document.querySelector('#evaluation');
+    if (elem == null) return;
+
+    elem.innerHTML = ""
+    raty(elem, {
+      starOn: "<%= asset_path('raty/star-on.png') %>",
+      starOff: "<%= asset_path('raty/star-off.png') %>",
+      starHalf: "<%= asset_path('raty/star-half.png') %>",
+      scoreName: "recipe[evaluation]",
+      half: true
+    });
+  });
+</script>

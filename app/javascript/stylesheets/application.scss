@@ -89,3 +89,10 @@ footer {
   background: rgba(75, 72, 67, .8);
   text-align: center;
 }
+
+// 淹れ方画像
+.recipe-processes__img {
+  width: 100%; 
+  height: 200px; 
+  object-fit: cover;
+}

@@ -1,0 +1,2 @@
+module Users::RecipeCommentsHelper
+end

@@ -4,7 +4,7 @@ class CreateRecipes < ActiveRecord::Migration[6.1]
       t.integer :user_id, null: false
       t.string :title, null: false
       t.text :contents, null: false
-      t.float :evaluation, null: false
+      t.float :evaluation, default: 0
 
       t.timestamps
     end
