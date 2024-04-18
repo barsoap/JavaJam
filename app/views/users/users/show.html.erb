@@ -5,11 +5,13 @@
       <div><%= image_tag @user.get_profile_image(100, 100), class: 'rounded-circle img-fluid d-block mx-auto' %></div>
       <div class="text-center mt-3 font-weight-bold"><%= @user.name %></div>
       <div class="text-center mt-3"><%= simple_format(@user.profile, sanitize: true, class: 'm-0') %></div>
-      <div class="row mt-3">
-        <div class="col-md-8 mx-auto">
-          <%= link_to 'ユーザー情報編集', edit_user_path(@user), class: "btn btn-secondary btn-block" %>
+      <% unless @user.guest_user? %>
+        <div class="row mt-3">
+          <div class="col-md-8 mx-auto">
+            <%= link_to 'ユーザー情報編集', edit_user_path(@user), class: "btn btn-secondary btn-block" %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
     <div class="col-md-8 offset-1"><!--右側のレシピ、ノート、アイテム、ブックマーク(レシピ、アイテム)一覧-->
       <ul class="nav nav-tabs">
