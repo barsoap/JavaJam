@@ -14,12 +14,20 @@
       <span id="evaluation"></span>
     </div>
   </div>
+  <% @recipe.tags.each do |tag| %>
+    <div class="row">
+      <%# タグを展開 %>
+      <li>
+        <%= link_to tag.name, tag_path(tag) %>
+      </li>
+    </div>
+  <% end %>
 
   <%= image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid my-3' %>
 
   <%= simple_format(@recipe.contents, sanitize: true, class: 'm-0') %>
 
-  <% unless @recipe.recipe_processes.nil? %>
+  <% if @recipe.recipe_processes.present? %>
     <h3 class="mt-3">淹れ方</h3>
   <% end %>
   <% @recipe.recipe_processes.each do |rp| %>
