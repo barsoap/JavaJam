@@ -19,7 +19,7 @@
 
   <%= simple_format(@recipe.contents, sanitize: true, class: 'm-0') %>
 
-  <% if @recipe.recipe_processes.nil? %>
+  <% unless @recipe.recipe_processes.nil? %>
     <h3 class="mt-3">淹れ方</h3>
   <% end %>
   <% @recipe.recipe_processes.each do |rp| %>
