@@ -14,11 +14,12 @@
       <span id="evaluation"></span>
     </div>
   </div>
+
   <% @recipe.tags.each do |tag| %>
     <div class="row">
       <%# タグを展開 %>
       <li>
-        <%= link_to tag.name, tag_path(tag) %>
+        <%= link_to tag.name, recipes_path(params[:tag_id], tag.id) %>
       </li>
     </div>
   <% end %>
