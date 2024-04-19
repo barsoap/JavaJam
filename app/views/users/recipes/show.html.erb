@@ -19,7 +19,7 @@
     <div class="row">
       <%# タグを展開 %>
       <li>
-        <%= link_to tag.name, recipes_path(params[:tag_id], tag.id) %>
+        <%= link_to tag.name, recipes_path(tag_id: tag) %>
       </li>
     </div>
   <% end %>
