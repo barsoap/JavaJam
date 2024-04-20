@@ -1,7 +1,21 @@
 class Users::RecipesController < ApplicationController
 
   def index
-    @recipes = Recipe.all
+    @tags = Tag.all
+    if params[:tag_id]
+      @recipes = Tag.find(params[:tag_id]).recipes
+    else
+      case params[:sort]
+      when 'recipe_latest'
+        @recipes = Recipe.order(created_at: :desc)
+      when 'recipe_oldest'
+        @recipes = Recipe.order(created_at: :asc)
+      when 'evaluation'
+        @recipes = Recipe.order(evaluation: :desc)
+      else
+        @recipes = Recipe.order(created_at: :desc)
+      end
+    end
   end
 
   def show
@@ -19,6 +33,7 @@ class Users::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
     if @recipe.save
+      @recipe.save_tags(params[:recipe][:tags]) if params[:recipe][:tags].present?
       redirect_to recipe_path(@recipe)
     else
       render :edit
@@ -32,6 +47,7 @@ class Users::RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
+      @recipe.save_tags(params[:recipe][:tags]) if params[:recipe][:tags].present?
       redirect_to recipe_path(@recipe)
     else
       render :edit

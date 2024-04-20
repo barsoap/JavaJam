@@ -4,8 +4,6 @@ Rails.application.routes.draw do
     post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
 
-  # devise_for :admins
-  # devise_for :users
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :users, controllers: {

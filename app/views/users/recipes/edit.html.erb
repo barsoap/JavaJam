@@ -37,6 +37,17 @@
             </div>
           </div>
         </div>
+        <!--タグ-->
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :tags, 'タグ', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :tags, value: @recipe.tags.pluck(:name), class: 'form-control', rows: 3, placeholder: "タグを入力" %>
+            </div>
+          </div>
+        </div>
         <!--評価-->
         <div class="form-group">
           <div class="row">
@@ -48,18 +59,16 @@
             </div>
           </div>
         </div>
+        <%= f.fields_for :recipe_processes do |f| %>
+          <%= render 'recipe_process_fields', f: f %>
+        <% end %>
         <!--手順(cocoon)-->
         <div class="form-group text-right">
           <%= link_to_add_association '手順追加',
                                       f,
                                       :recipe_processes,
-                                      render_options: {
-                                        locals: {
-                                          'recipe_process_firlds', recipe_process: @recipe.recipe_process
-                                        }
-                                      }
                                       class: 'btn btn-secondary'
-                                      %>
+          %>
         </div>
         <!--変更ボタン-->
         <div class="form-group">

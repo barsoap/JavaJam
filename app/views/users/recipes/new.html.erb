@@ -22,7 +22,7 @@
               <%= f.label :title, 'タイトル', class: 'm-0' %>
             </div>
             <div class="col-md-8">
-              <%= f.text_field :title, class: 'form-control' %>
+              <%= f.text_field :title, class: 'form-control', placeholder: "タイトルを入力" %>
             </div>
           </div>
         </div>
@@ -33,7 +33,18 @@
               <%= f.label :contents, 'レシピの内容', class: 'm-0' %>
             </div>
             <div class="col-md-8">
-              <%= f.text_area :contents, class: 'form-control', rows: 3, placeholder: "コメントを入力" %>
+              <%= f.text_area :contents, class: 'form-control', rows: 3, placeholder: "レシピを入力" %>
+            </div>
+          </div>
+        </div>
+        <!--タグ-->
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :tags, 'タグ', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :tags, value: @recipe.tags.pluck(:name), class: 'form-control', rows: 3, placeholder: "タグを入力" %>
             </div>
           </div>
         </div>
@@ -54,13 +65,13 @@
                                       f,
                                       :recipe_processes,
                                       class: 'btn btn-secondary'
-                                      %>
+          %>
         </div>
         <!--投稿ボタン-->
         <div class="form-group">
           <div class="row mt-3">
             <div class="col-md-8 offset-0 offset-md-4">
-              <button type="submit" class="btn btn-primary btn-block">投稿する</button>
+              <%= f.button '投稿する', class: 'btn btn-primary btn-block' %>
             </div>
           </div>
         </div>
