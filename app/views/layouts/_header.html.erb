@@ -1,23 +1,47 @@
 <header class="position-fixed w-100">
-  <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
-    <a href="<%= root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
-    <ul class="d-flex list-unstyled m-0 menu__basic">
-      <li><%= link_to 'レシピ', recipes_path, class: 'text-decoration-none text-ivory' %></li>
-      <li><%= link_to 'アイテム', equipments_path, class: 'text-decoration-none text-ivory' %></li>
-      <li><%= link_to 'ノート', notes_path, class: 'text-decoration-none text-ivory' %></li>
-    </ul>
-    <ul class="d-flex list-unstyled m-0 menu__login">
-      <% unless user_signed_in? %>
-        <li><%= link_to '新規登録', new_user_registration_path, class: 'text-decoration-none text-ivory' %></li>
-        <li><%= link_to 'ログイン', new_user_session_path, class: 'text-decoration-none text-ivory' %></li>
-      <% else %>
-        <li><%= link_to 'マイページ', user_path(current_user), class: 'text-decoration-none text-ivory' %></li>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'text-decoration-none text-ivory' %></li>
-      <% end %>
-    </ul>
-  </nav>
+  <!--管理者ログインしてないとき-->
+  <% unless admin_signed_in? %>
+    <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
+      <a href="<%= root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
+      <ul class="d-flex list-unstyled m-0 menu__basic">
+        <li><%= link_to 'レシピ', recipes_path, class: 'text-decoration-none text-ivory' %></li>
+        <li><%= link_to 'アイテム', equipments_path, class: 'text-decoration-none text-ivory' %></li>
+        <li><%= link_to 'ノート', notes_path, class: 'text-decoration-none text-ivory' %></li>
+      </ul>
+      <ul class="d-flex list-unstyled m-0 menu__login">
+        <% unless user_signed_in? %>
+          <li><%= link_to '新規登録', new_user_registration_path, class: 'text-decoration-none text-ivory' %></li>
+          <li><%= link_to 'ログイン', new_user_session_path, class: 'text-decoration-none text-ivory' %></li>
+        <% else %>
+          <li><%= link_to 'マイページ', user_path(current_user), class: 'text-decoration-none text-ivory' %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'text-decoration-none text-ivory' %></li>
+        <% end %>
+      </ul>
+    </nav>
+  <!--管理者ログイン時-->
+  <% else %>
+      <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
+        <a href="<%= admins_root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
+        <ul class="d-flex list-unstyled m-0 menu__basic">
+          <li><%= link_to 'レシピ', admins_recipes_path, class: 'text-decoration-none text-ivory' %></li>
+          <li><%= link_to 'アイテム', admins_equipments_path, class: 'text-decoration-none text-ivory' %></li>
+          <li><%= link_to 'ノート', admins_notes_path, class: 'text-decoration-none text-ivory' %></li>
+        </ul>
+        <ul class="d-flex list-unstyled m-0 menu__login">
+          <% unless admin_signed_in? %>
+            <li class="d-block text-ivory">管理者ログイン中</li>
+            <li><%= link_to 'ログイン', new_admin_session, class: 'text-decoration-none btn btn-info btn-sm' %></li>
+          <% else %>
+            <li class="d-block text-ivory">管理者ログイン中</li>
+            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-decoration-none btn btn-info btn-sm' %></li>
+          <% end %>
+        </ul>
+      </nav>
+  <% end %>
 
-  <%= render 'users/searchs/form' %>
+  <!--<div class="d-flex justify-content-end">-->
+    <%#= render 'users/searchs/form' %>
+  <!--</div>-->
 
 </header>
 
