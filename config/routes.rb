@@ -40,14 +40,13 @@ Rails.application.routes.draw do
   namespace :admins do
     root to: "homes#top"
     resources :users, only: [:show, :edit,:update] do
-      collection do
-        patch 'withdraw'
-      end
+      patch "withdraw"
     end
-    resources :recipes, only: [:index, :show, :destroy]
+    resources :recipes, only: [:index, :show, :destroy] do
+      resources :recipe_comments, only: [:destroy]
+    end
     resources :equipments, only: [:index, :show, :destroy]
     resources :notes, only: [:index, :show, :destroy]
-    resources :comments, only: [:destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,2 +1,80 @@
-<h1>Admins::Recipes#show</h1>
-<p>Find me in app/views/admins/recipes/show.html.erb</p>
+<div class="container py-5">
+
+  <h3 class="mb-3"><%= @recipe.title %></h3>
+  <div class="d-block d-md-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <%= link_to (image_tag @recipe.user.get_profile_image(50,50), class: 'rounded-circle d-block'), user_path(@recipe.user)%>
+      <span class="ml-3"><%= @recipe.user.name %></span>
+    </div>
+    <div class="mt-3 mt-md-0">
+      <%= link_to 'レシピを削除する', admins_recipe_path(@recipe), method: :delete, class: 'btn btn-danger mr-3', data: { confirm: '本当に削除しますか？'} %>
+      <span id="evaluation"></span>
+    </div>
+  </div>
+
+  <% @recipe.tags.each do |tag| %>
+    <div class="row">
+      <%# タグを展開 %>
+      <li>
+        <%= link_to tag.name, recipes_path(tag_id: tag) %>
+      </li>
+    </div>
+  <% end %>
+
+  <%= image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid my-3' %>
+
+  <%= simple_format(@recipe.contents, sanitize: true, class: 'm-0') %>
+
+  <% if @recipe.recipe_processes.present? %>
+    <h3 class="mt-3">淹れ方</h3>
+  <% end %>
+  <% @recipe.recipe_processes.each do |rp| %>
+    <div class="mt-3">
+      <div class="row">
+        <div class="col-md-3">
+          <% if rp.recipe_process_image.attached? %>
+            <%= image_tag rp.recipe_process_image, class: 'recipe-processes__img' %>
+          <% else %>
+            <%= image_tag 'top/tyler-nix-72VzVRVnWLE-unsplash.jpg', class: 'recipe-processes__img' %>
+          <% end %>
+        </div>
+        <div class="col-md-9">
+          <h5 class="m-0"><%= rp.process %></h5>
+          <% unless rp.description.nil? %>
+            <div>
+              <%= simple_format(rp.description, sanitize: true, class: 'm-0') %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- コメント一覧-->
+  <% if @recipe.recipe_comments.present? %>
+  <h3 class="py-3">コメント一覧</h3>
+    <% @recipe.recipe_comments.each do |comment| %>
+      <%= link_to (image_tag comment.user.get_profile_image(40,40)), admins_user_path(comment.user_id) %>
+      <%= comment.contents %>
+      <%= link_to 'コメント削除', recipe_recipe_comment_path(comment.recipe.id, comment.id), method: :delete, class: 'btn btn-danger btn-sm' %>
+    <% end %>
+  <% end %>
+
+</div>
+
+<script>
+  $(document).ready(function(){
+    let elem = document.querySelector('#evaluation');
+    if (elem == null) return;
+
+    elem.innerHTML = ""
+    raty(elem, {
+      starOn: "<%= asset_path('raty/star-on.png') %>",
+      starOff: "<%= asset_path('raty/star-off.png') %>",
+      starHalf: "<%= asset_path('raty/star-half.png') %>",
+      score: "<%= @recipe.evaluation %>",
+      half: true,
+      readOnly: true
+    });
+  });
+</script>

@@ -44,7 +44,7 @@
               <%= f.label :tags, 'タグ', class: 'm-0' %>
             </div>
             <div class="col-md-8">
-              <%= f.text_field :tags, value: @recipe.tags.pluck(:name), class: 'form-control', rows: 3, placeholder: "タグを入力" %>
+              <%= f.text_field :tags, value: @recipe.tags.pluck(:name), class: 'form-control', placeholder: "タグを入力" %>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
-              <%= f.label :evaluation, '評価', class: 'm-0' %>
+              <label class="m-0">評価</label>
             </div>
             <div class="col-md-8"><!--星の画像のところ-->
               <span id="evaluation"></span>
@@ -85,7 +85,7 @@
 
 <script>
 //ratyの星
-  $(document).on('turbolinks:load', function() {
+  $(document).ready(function(){
     let elem = document.querySelector('#evaluation');
     if (elem == null) return;
 

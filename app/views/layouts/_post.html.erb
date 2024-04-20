@@ -10,6 +10,25 @@
 </p>
 
 <script>
+  $(window).scroll(function (){
+    var pos = ($(window).scrollTop() + window.innerHeight) - $("footer").offset().top;
+    if (pos <= 0) {
+      $("#btn").css("bottom", "10px");
+      $(".balloon").css("bottom", "70px");
+    } else {
+      $("#btn").css("bottom", (pos + 10) + "px");
+      $(".balloon").css("bottom", (pos + 60) + "px");
+    }
+  })
+
+  $(window).ready(function () {
+    if ($("body").innerHeight() === window.innerHeight) {
+      var pos = ($(window).scrollTop() + window.innerHeight) - $("footer").offset().top;
+      $("#btn").css("bottom", (pos + 10) + "px");
+      $(".balloon").css("bottom", (pos + 60) + "px");
+    }
+  })
+
   $(function() {
   $(".balloon").after().hide();
   $("#btn").click(function() {
