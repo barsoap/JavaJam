@@ -65,7 +65,7 @@
   <!--コメント投稿-->
   <%= form_with model:[@recipe, @recipe_comment] do |f| %>
     <div class="form-group">
-      <%= f.text_area :contents, class: 'form-control' %>
+      <%= f.text_area :contents, class: 'form-control', placeholder: "コメントを入力" %>
     </div>
     <div class="form-group">
       <%= f.submit '送信する', class: 'btn btn-primary' %>
