@@ -21,7 +21,7 @@
       <% @recipe.tags.each do |tag| %>
         <li>
           <span class="badge badge-secondary p-2">
-            <%= link_to tag.name, recipes_path(tag_id: tag), class: 'text-white' %>
+            <%= link_to "#{tag.name} (#{tag.recipes.count})", recipes_path(tag_id: tag), class: 'text-white' %>
           </span>
         </li>
       <% end %>

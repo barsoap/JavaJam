@@ -1,0 +1,13 @@
+<div class="container py-5">
+  <h3 class="mb-3"><i class="fa-solid fa-tags mr-2"></i> レシピタグ一覧</h3>
+  <div class="tags">
+    <ul class="list-unstyled d-flex flex-wrap">
+      <% @tags.each do |tag| %>
+        <% unless tag.recipes.count == 0 %>
+          <li class="mb-2"><span class="badge badge-secondary p-2"><%= link_to "#{tag.name} (#{tag.recipes.count})", recipes_path(tag_id: tag), class: 'text-white' %></span></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <%= link_to '<i class="fa-solid fa-angles-left"></i> もどる'.html_safe, recipes_path, class: 'btn btn-sm btn-outline-secondary' %>
+</div>

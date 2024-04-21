@@ -2,7 +2,11 @@
     <% recipes.each do |recipe| %>
       <div class="col-md-6 col-lg-4 mb-3">
         <div class="card">
-          <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+          <% if recipe.recipe_image.attached? %>
+            <%= link_to (image_tag recipe.recipe_image, class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+          <% else %>
+            <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+          <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %></h5>
             <p class="card-text"><%= recipe.contents.truncate(20) %></p>

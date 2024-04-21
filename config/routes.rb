@@ -27,11 +27,12 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    resources :recipes, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    get 'recipes/tags', to: 'recipes#recipe_tags'
+    resources :recipes do
       resources :recipe_comments, only:[:create, :destroy]
     end
-    resources :notes, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-    resources :equipments, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :notes
+    resources :equipments
     get "/search", to: "searchs#search"
   end
 

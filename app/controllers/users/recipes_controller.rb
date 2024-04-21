@@ -1,7 +1,7 @@
 class Users::RecipesController < ApplicationController
 
   def index
-    @tags = Tag.all
+    @tags = Tag.take(10)
     if params[:tag_id]
       @recipes = Tag.find(params[:tag_id]).recipes
     else
@@ -58,6 +58,10 @@ class Users::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
     redirect_to recipes_path
+  end
+
+  def recipe_tags
+    @tags = Tag.all
   end
 
 
