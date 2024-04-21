@@ -16,6 +16,11 @@ class Users::RecipeCommentsController < ApplicationController
     redirect_to recipes_path
   end
 
+  def destroy
+    RecipeComment.find(params[:id]).destroy
+    redirect_to recipe_path(prams[:recipe_id])
+  end
+
   private
 
   def recipe_comment_params

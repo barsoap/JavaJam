@@ -10,6 +10,7 @@
 </p>
 
 <script>
+  //投稿ボタンがスクロール高でフッターに固定される
   $(window).scroll(function (){
     var pos = ($(window).scrollTop() + window.innerHeight) - $("footer").offset().top;
     if (pos <= 0) {
