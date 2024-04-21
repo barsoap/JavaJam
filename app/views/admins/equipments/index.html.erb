@@ -1,2 +1,29 @@
-<h1>Admins::Equipments#index</h1>
-<p>Find me in app/views/admins/equipments/index.html.erb</p>
+<div class="container pb-5">
+
+  <div class="col">
+    <h3 class="mt-5">アイテム一覧</h3>
+    <table class="table table-hover mt-3">
+      <tead class="thead-light">
+        <tr>
+          <th scope="col">アイテムID</th>
+          <th scope="col">アイテム名</th>
+          <th scope="col">投稿日時</th>
+          <th scope="col">投稿ユーザー</th>
+          <th scope="col"></th>
+        </tr>
+      </tead>
+      <% @equipments.each do |equipment| %>
+        <tbody>
+          <tr>
+            <td><%= equipment.id %></td>
+            <td class="font-weight-bold"><%= link_to (equipment.name), admins_equipment_path(equipment), class: 'text-dark' %></td>
+            <td class="text-black-50"><%= equipment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %></td>
+            <td><%= link_to (equipment.user.name), admins_user_path(equipment.user.id), class: 'text-dark' %></td>
+            <td><%= link_to '削除', admins_equipment_path(equipment), method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: "本当に削除しますか？" } %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+
+</div>

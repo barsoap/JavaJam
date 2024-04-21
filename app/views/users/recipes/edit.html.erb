@@ -26,6 +26,17 @@
             </div>
           </div>
         </div>
+        <!--画像追加-->
+        <div class="form-group">
+          <div class="row">
+            <div class="offset-0 offset-md-4 col-md-8">
+              <div class="custom-file">
+                <%= f.file_field :recipe_image, accept: "image/*", class: 'custom-file-input', onchange: 'fileOnChange(this);' %>
+                <%= f.label :recipe_image, '選択してください', class: 'custom-file-label' %>
+              </div>
+            </div>
+          </div>
+        </div>
         <!--コンテンツ(レシピの内容)-->
         <div class="form-group">
           <div class="row">
@@ -99,4 +110,9 @@
       half: true
     });
   });
+
+//画像の名前/以降が表示されるようにする
+  function fileOnChange (elem) {
+    $(elem).next('.custom-file-label').html($(elem).val().split('\\').pop());
+  };
 </script>
