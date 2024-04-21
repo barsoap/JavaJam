@@ -22,9 +22,9 @@
     }
   })
 
-  $(window).ready(function () {
-    if ($("body").innerHeight() === window.innerHeight && $(window).scrollTop() > 0) {
-      var pos = ($(window).scrollTop() + window.innerHeight) - $("footer").offset().top;
+  $(window).on('load resize', function () {
+    if (window.innerHeight > $("footer").offset().top) {
+      var pos = window.innerHeight - $("footer").offset().top;
       $("#btn").css("bottom", (pos + 10) + "px");
       $(".balloon").css("bottom", (pos + 60) + "px");
     }
