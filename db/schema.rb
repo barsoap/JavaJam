@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_18_104044) do
+ActiveRecord::Schema.define(version: 2024_04_22_120457) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 2024_04_18_104044) do
     t.float "evaluation", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follow_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follow_id"], name: "index_follows_on_follow_id"
+    t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -126,6 +135,8 @@ ActiveRecord::Schema.define(version: 2024_04_18_104044) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "follows", "users"
+  add_foreign_key "follows", "users", column: "follow_id"
   add_foreign_key "recipe_tags", "recipes"
   add_foreign_key "recipe_tags", "tags"
 end

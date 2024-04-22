@@ -1,0 +1,14 @@
+<%# 自分の場合は、フォロー対象外 %>
+<% unless user == current_user %>
+  <%# フォロー済みかどうか確認する %>
+  <%# following?は、Userモデルで定義しており、見つからない場合はnilが戻る %>
+  <% if user.following?(current_user, user.id).nil? %>
+    <%# フォローする : follows#create %>
+    <%# TODO: current_userをここで渡すと勝手に追加されるため、フォロー対象のユーザーの情報のみ渡す %>
+    <%= link_to 'Follow', user_follows_path(user.id), method: :post, class: 'btn btn-primary', remote: true %>
+  <% else %>
+    <%# フォローを外す : follows#destroy %>
+    <%# TODO: current_userをここで渡すと勝手に削除されるため、フォロー対象のユーザーをidで渡す %>
+    <%= link_to 'UnFollow', user_follows_path(user.id), method: :delete, class: 'btn btn-warning', remote: true %>
+  <% end %>
+<% end %>
