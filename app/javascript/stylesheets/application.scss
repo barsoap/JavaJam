@@ -110,3 +110,23 @@ footer {
 .tags > ul > li:last-child {
   margin-right: 0;
 }
+
+// ページネーション
+.page-item.active > .page-link,
+.page-item.active > .page-link:hover {
+  border-color: #756B57;
+  background-color: #fff;
+  color: #756B57;
+}
+
+.page-item > .page-link {
+  border-color: #756B57;
+  background-color: #fff;
+  color: #756B57;
+}
+
+.page-item > .page-link:hover {
+  border-color: #756B57;
+  background-color: #756B57;
+  color: #fff;
+}

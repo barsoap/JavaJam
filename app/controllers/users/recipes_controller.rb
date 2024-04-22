@@ -1,4 +1,5 @@
 class Users::RecipesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @tags = Tag.take(10)
