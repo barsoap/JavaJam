@@ -7,13 +7,13 @@ class Users::RecipesController < ApplicationController
     else
       case params[:sort]
       when 'recipe_latest'
-        @recipes = Recipe.order(created_at: :desc)
+        @recipes = Recipe.page(params[:page]).per(12).order(created_at: :desc)
       when 'recipe_oldest'
-        @recipes = Recipe.order(created_at: :asc)
+        @recipes = Recipe.page(params[:page]).per(12).order(created_at: :asc)
       when 'evaluation'
-        @recipes = Recipe.order(evaluation: :desc)
+        @recipes = Recipe.page(params[:page]).per(12).order(evaluation: :desc)
       else
-        @recipes = Recipe.order(created_at: :desc)
+        @recipes = Recipe.page(params[:page]).per(12).order(created_at: :desc)
       end
     end
   end

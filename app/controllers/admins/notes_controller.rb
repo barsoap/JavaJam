@@ -2,7 +2,7 @@ class Admins::NotesController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @notes = Note.all
+    @notes = Note.page(params[:page]).per(10)
   end
 
   def show

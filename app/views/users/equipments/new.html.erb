@@ -3,8 +3,8 @@
 
     <div class="col-md-8">
       <h3 class="text-center pb-5">アイテム投稿</h3>
-
-      <div class="text-center bg-primary"><!--エラー文-->
+      <!--エラー文-->
+      <div class="text-center bg-primary">
         <% if @equipment.errors.any? %>
           <ul class="list-unstyled">
             <% @equipment.errors.full_messages.each do |message| %>
@@ -15,7 +15,7 @@
       </div>
 
       <%= form_with model: @equipment, url: equipments_path, method: :post do |f| %>
-
+      <!--アイテム名-->
       <div class="form-group">
         <div class="row">
           <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
@@ -26,6 +26,18 @@
           </div>
         </div>
       </div>
+      <!--画像追加-->
+      <div class="form-group">
+        <div class="row">
+          <div class="offset-0 offset-md-4 col-md-8">
+            <div class="custom-file">
+              <%= f.file_field :equipment_image, accept: "image/*", class: 'custom-file-input', onchange: 'fileOnChange(this);' %>
+              <%= f.label :equipment_image, '画像を選択してください', class: 'custom-file-label' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--説明-->
       <div class="form-group">
         <div class="row">
           <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
@@ -36,6 +48,7 @@
           </div>
         </div>
       </div>
+      <!--評価(raty)-->
       <div class="form-group">
         <div class="row">
           <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
@@ -46,6 +59,7 @@
           </div>
         </div>
       </div>
+      <!--投稿ボタン-->
       <div class="form-group">
         <div class="row mt-3">
           <div class="col-md-8 offset-0 offset-md-4">
@@ -62,6 +76,7 @@
 </div>
 
 <script>
+  //ratyの星
   $(document).ready(function(){
     let elem = document.querySelector('#evaluation');
     if (elem == null) return;
@@ -75,4 +90,8 @@
       half: true
     });
   });
+  //画像の名前/以降が表示されるようにする
+  function fileOnChange (elem) {
+    $(elem).next('.custom-file-label').html($(elem).val().split('\\').pop());
+  };
 </script>

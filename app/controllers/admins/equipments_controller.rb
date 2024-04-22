@@ -1,6 +1,6 @@
 class Admins::EquipmentsController < ApplicationController
   def index
-    @equipments = Equipment.all
+    @equipments = Equipment.page(params[:page]).per(10)
   end
 
   def show

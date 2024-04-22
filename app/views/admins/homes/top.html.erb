@@ -16,20 +16,25 @@
         <tbody>
           <tr>
             <td><%= user.id %></td>
-            <td><%= link_to (user.name), admins_user_path(user) %></td>
+            <td class="font-weight-bold"><%= link_to (user.name), admins_user_path(user), class: 'text-dark' %></td>
             <td><%= user.email %></td>
             <td>
               <% if user.is_active == true %>
-                <p class="m-0">有効会員</p>
+                <p class="m-0 text-success">有効会員</p>
               <% else %>
-                <p class="m-0">退会済</p>
+                <p class="m-0 text-danger">退会済</p>
               <% end %>
             </td>
-            <td><%= link_to '編集', edit_admins_user_path(user), class: 'btn btn-outline-info btn-sm' %></td>
+            <td><%= link_to '退会させる', edit_admins_user_path(user), class: 'btn btn-danger btn-sm' %></td>
           </tr>
         </tbody>
       <% end %>
     </table>
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @users %>
+    </div>
+
   </div>
 
 </div>

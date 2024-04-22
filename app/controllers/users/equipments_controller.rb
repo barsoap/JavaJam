@@ -1,4 +1,23 @@
 class Users::EquipmentsController < ApplicationController
+  def index
+    case params[:sort]
+      when 'equipment_latest'
+        @equipments = Equipment.page(params[:page]).per(12).order(created_at: :desc)
+      when 'equipment_oldest'
+        @equipments = Equipment.page(params[:page]).per(12).order(created_at: :asc)
+      when 'evaluation'
+        @equipments = Equipment.page(params[:page]).per(12).order(evaluation: :desc)
+      else
+        @equipments = Equipment.page(params[:page]).per(12).order(created_at: :desc)
+    end
+  end
+
+  def show
+    @equipment = Equipment.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+      redirect_to equipments_path
+  end
+
   def new
     @equipment = Equipment.new
   end
@@ -11,14 +30,6 @@ class Users::EquipmentsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def index
-    @equipments = Equipment.all
-  end
-
-  def show
-    @equipment = Equipment.find(params[:id])
   end
 
   def edit
@@ -45,7 +56,7 @@ class Users::EquipmentsController < ApplicationController
 
   private
   def equipment_params
-    params.require(:equipment).permit(:user_id, :name, :description, :evaluation)
+    params.require(:equipment).permit(:user_id, :name, :description, :evaluation, :equipment_image)
   end
 
 end
