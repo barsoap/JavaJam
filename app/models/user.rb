@@ -8,6 +8,25 @@ class User < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :equipments, dependent: :destroy
   has_many :recipe_comments, dependent: :destroy
+  has_many :follows
+
+  # フォローユーザーの検索
+  #   フォロー済みの場合、ユーザーデータを返す
+  #   フォローしていない場合は、nilを返す
+  def following?(current_user, follow_id)
+    # Followから自分と対象のユーザーがANDになっているレコードを検索
+    Follow.find_by(user_id: follow_id, follow_id: current_user.id)
+  end
+
+  # フォローしている一覧取得
+  def followed(user)
+    Follow.where(follow_id: user.id)
+  end
+
+  # フォローされている一覧取得
+  def follower(current_user)
+    Follow.where(user_id: current_user.id)
+  end
 
   has_one_attached :profile_image
 

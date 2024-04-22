@@ -1,0 +1,14 @@
+<div class="container py-5">
+  <h2>follows <small>(<%= @follows.count %>)</small></h2>
+  <ul>
+    <% @follows.each do |follow| %>
+      <li><%= link_to follow.user.name, user_path(follow.user) %></li>
+    <% end %>
+  </ul>
+  <h2>followers <small>(<%= @followers.count %>)</small></h2>
+  <ul>
+    <% @followers.each do |follower| %>
+      <li><%= link_to follower.name, user_path(follower.id) %></li>
+    <% end %>
+  </ul>
+</div>

@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     # 論理削除用のルーティング
     # patch '/users/:id/withdraw' => 'users#withdraw'
+
     resources :users, only: [:edit, :show, :update] do
+      resource :follows, only: [:show, :create, :destroy]
       collection do
         patch 'withdraw'
       end
