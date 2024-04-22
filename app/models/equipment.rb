@@ -1,6 +1,6 @@
 class Equipment < ApplicationRecord
 
-  has_one_attached :note_image
+  has_one_attached :equipment_image
 
   belongs_to :user
 

@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+// TurbolinksがONの場合、同一のidまたはclassでRatyが反応しなくなるため、OFFとする。
+// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "script.js"
@@ -28,5 +29,5 @@ window.raty = function(elem,opt) {
 require("@nathanvda/cocoon") //cocoon
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()

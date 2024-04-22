@@ -3,7 +3,7 @@
 
     <div class="col">
       <h3 class="text-center pb-5">レシピ編集</h3>
-
+      <!--エラーメッセージ-->
       <div class="text-center bg-primary">
         <% if @recipe.errors.any? %>
           <ul class="list-unstyled">
@@ -26,6 +26,17 @@
             </div>
           </div>
         </div>
+        <!--画像追加-->
+        <div class="form-group">
+          <div class="row">
+            <div class="offset-0 offset-md-4 col-md-8">
+              <div class="custom-file">
+                <%= f.file_field :recipe_image, accept: "image/*", class: 'custom-file-input', onchange: 'fileOnChange(this);' %>
+                <%= f.label :recipe_image, '選択してください', class: 'custom-file-label' %>
+              </div>
+            </div>
+          </div>
+        </div>
         <!--コンテンツ(レシピの内容)-->
         <div class="form-group">
           <div class="row">
@@ -44,15 +55,15 @@
               <%= f.label :tags, 'タグ', class: 'm-0' %>
             </div>
             <div class="col-md-8">
-              <%= f.text_field :tags, value: @recipe.tags.pluck(:name), class: 'form-control', rows: 3, placeholder: "タグを入力" %>
+              <%= f.text_field :tags, value: @recipe.tags.pluck(:name), class: 'form-control', placeholder: "スペースを空けると複数タグ追加できます" %>
             </div>
           </div>
         </div>
-        <!--評価-->
+        <!--評価(raty)-->
         <div class="form-group">
           <div class="row">
             <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
-              <%= f.label :evaluation, '評価', class: 'm-0' %>
+              <label class="m-0">評価</label>
             </div>
             <div class="col-md-8"><!--星の画像のところ-->
               <span id="evaluation"></span>
@@ -85,7 +96,7 @@
 
 <script>
 //ratyの星
-  $(document).on('turbolinks:load', function() {
+  $(document).ready(function(){
     let elem = document.querySelector('#evaluation');
     if (elem == null) return;
 
@@ -99,4 +110,9 @@
       half: true
     });
   });
+
+//画像の名前/以降が表示されるようにする
+  function fileOnChange (elem) {
+    $(elem).next('.custom-file-label').html($(elem).val().split('\\').pop());
+  };
 </script>

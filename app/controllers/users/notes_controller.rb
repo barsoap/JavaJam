@@ -1,4 +1,19 @@
 class Users::NotesController < ApplicationController
+  def index
+    case params[:sort]
+      when 'note_latest'
+        @notes = Note.page(params[:page]).per(12).order(created_at: :desc)
+      when 'note_oldest'
+        @notes = Note.page(params[:page]).per(12).order(created_at: :asc)
+      else
+        @notes = Note.page(params[:page]).per(12).order(created_at: :desc)
+    end
+  end
+
+  def show
+    @note = Note.find(params[:id])
+  end
+
   def new
     @note = Note.new
   end
@@ -11,14 +26,6 @@ class Users::NotesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def index
-    @notes = Note.all
-  end
-
-  def show
-    @note = Note.find(params[:id])
   end
 
   def edit
@@ -45,6 +52,6 @@ class Users::NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:user_id, :title, :contents)
+    params.require(:note).permit(:user_id, :title, :contents, :note_image)
   end
 end

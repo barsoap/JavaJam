@@ -1,6 +1,7 @@
 <div class="container py-5">
 
-  <h3 class="mb-3"><%= @note.title %></h3>
+  <h3 class="mb-3"><i class="fa-solid fa-book-open"></i> <%= @note.title %></h3>
+  <hr>
   <div class="d-block d-md-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
       <%= link_to (image_tag @note.user.get_profile_image(50,50), class: 'rounded-circle d-block'), user_path(@note.user)%>
@@ -15,8 +16,13 @@
     <% end %>
   </div>
 
-  <%= image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid my-3' %>
-
-  <%= simple_format(@note.contents, sanitize: true, class: 'm-0') %>
+  <% if @note.note_image.attached? %>
+    <%= image_tag @note.note_image, class: 'img-fluid my-3' %>
+  <% else %>
+    <%= image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid my-3' %>
+  <% end %>
+  <div class="py-3 mb-3">
+    <%= simple_format(@note.contents, sanitize: true, class: 'm-0') %>
+  </div>
 
 </div>

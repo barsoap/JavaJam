@@ -1,0 +1,34 @@
+<div class="container pb-5">
+
+  <div class="col">
+    <h3 class="mt-5">レシピ一覧</h3>
+    <table class="table table-hover mt-3">
+      <tead class="thead-light">
+        <tr>
+          <th scope="col">レシピID</th>
+          <th scope="col">レシピ名</th>
+          <th scope="col">投稿日時</th>
+          <th scope="col">投稿ユーザー</th>
+          <th scope="col"></th>
+        </tr>
+      </tead>
+      <% @recipes.each do |recipe| %>
+        <tbody>
+          <tr>
+            <td><%= recipe.id %></td>
+            <td class="font-weight-bold"><%= link_to (recipe.title), admins_recipe_path(recipe), class: 'text-dark' %></td>
+            <td class="text-black-50"><%= recipe.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %></td>
+            <td><%= link_to (recipe.user.name), admins_user_path(recipe.user.id), class: 'text-dark' %></td>
+            <td><%= link_to '削除', admins_recipe_path(recipe), method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: "本当に削除しますか？" } %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @recipes %>
+    </div>
+
+  </div>
+
+</div>

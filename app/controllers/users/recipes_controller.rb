@@ -1,19 +1,19 @@
 class Users::RecipesController < ApplicationController
 
   def index
-    @tags = Tag.all
+    @tags = Tag.take(10)
     if params[:tag_id]
       @recipes = Tag.find(params[:tag_id]).recipes
     else
       case params[:sort]
       when 'recipe_latest'
-        @recipes = Recipe.order(created_at: :desc)
+        @recipes = Recipe.page(params[:page]).per(12).order(created_at: :desc)
       when 'recipe_oldest'
-        @recipes = Recipe.order(created_at: :asc)
+        @recipes = Recipe.page(params[:page]).per(12).order(created_at: :asc)
       when 'evaluation'
-        @recipes = Recipe.order(evaluation: :desc)
+        @recipes = Recipe.page(params[:page]).per(12).order(evaluation: :desc)
       else
-        @recipes = Recipe.order(created_at: :desc)
+        @recipes = Recipe.page(params[:page]).per(12).order(created_at: :desc)
       end
     end
   end
@@ -58,6 +58,10 @@ class Users::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
     redirect_to recipes_path
+  end
+
+  def recipe_tags
+    @tags = Tag.all
   end
 
 

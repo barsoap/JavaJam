@@ -1,4 +1,23 @@
 <div class="container py-5">
-  <h3 class="mb-3">アイテム一覧</h3>
+  <h3 class="mt-2 mb-3"><i class="fa-solid fa-kitchen-set"></i> アイテム一覧</h3>
+  <div class="row my-3">
+    <div class="col-md-4">
+      <%= form_tag(equipments_path, method: :get) do %>
+        <%= select_tag :sort,
+                  options_for_select(
+                    [
+                      ['投稿新しい順', 'equipment_latest'],
+                      ['投稿古い順', 'equipment_oldest'],
+                      ['評価順', 'evaluation']
+                    ], params[:sort]),
+                    {
+                      include_blank: '並び替え',
+                      class: 'form-control',
+                      onchange: 'submit(this.form)'
+                    }
+        %>
+      <% end %>
+    </div>
+  </div>
   <%= render 'index', equipments: @equipments %>
 </div>
