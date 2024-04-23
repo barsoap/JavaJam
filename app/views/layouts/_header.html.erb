@@ -4,7 +4,7 @@
     <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
       <a href="<%= root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
       <ul class="d-flex list-unstyled m-0 menu__basic">
-        <li><%= link_to 'レシピ', recipes_path, class: "text-decoration-none #{controller_name == 'recipes' ? 'font-weight-bold' : 'text-ivory'}" %></li>
+        <li><%= link_to 'レシピ', recipes_path, class: "text-decoration-none #{controller_name == 'recipes' || controller_name == 'recipe_bookmarks' ? 'font-weight-bold' : 'text-ivory'}" %></li>
         <li><%= link_to 'アイテム', equipments_path, class: "text-decoration-none #{controller_name == 'equipments' ? 'font-weight-bold' : 'text-ivory'}" %></li>
         <li><%= link_to 'ノート', notes_path, class: "text-decoration-none #{controller_name == 'notes' ? 'font-weight-bold' : 'text-ivory'}" %></li>
       </ul>

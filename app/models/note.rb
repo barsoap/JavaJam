@@ -16,4 +16,7 @@ class Note < ApplicationRecord
     end
   end
 
+  validates :title, presence: true
+  validates :contents, presence: true
+
 end

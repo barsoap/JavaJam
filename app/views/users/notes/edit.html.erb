@@ -3,16 +3,16 @@
 
     <div class="col">
       <h3 class="text-center pb-5">ノート編集</h3>
-      <!--エラーメッセージ-->
-      <div class="text-center bg-primary">
-        <% if @note.errors.any? %>
-          <ul class="list-unstyled">
+      <!--エラー文-->
+      <% if @note.errors.any? %>
+        <div class="text-center validate-errors-message">
+          <ul class="list-unstyled m-0">
             <% @note.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
       <%= form_with model: @note, url: note_path(@note), method: :patch do |f| %>
         <!--タイトル-->
