@@ -4,9 +4,9 @@
     <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
       <a href="<%= root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
       <ul class="d-flex list-unstyled m-0 menu__basic">
-        <li><%= link_to 'レシピ', recipes_path, class: 'text-decoration-none text-ivory' %></li>
-        <li><%= link_to 'アイテム', equipments_path, class: 'text-decoration-none text-ivory' %></li>
-        <li><%= link_to 'ノート', notes_path, class: 'text-decoration-none text-ivory' %></li>
+        <li><%= link_to 'レシピ', recipes_path, class: "text-decoration-none #{controller_name == 'recipes' ? 'font-weight-bold' : 'text-ivory'}" %></li>
+        <li><%= link_to 'アイテム', equipments_path, class: "text-decoration-none #{controller_name == 'equipments' ? 'font-weight-bold' : 'text-ivory'}" %></li>
+        <li><%= link_to 'ノート', notes_path, class: "text-decoration-none #{controller_name == 'notes' ? 'font-weight-bold' : 'text-ivory'}" %></li>
       </ul>
       <ul class="d-flex list-unstyled m-0 menu__login">
         <% unless user_signed_in? %>
@@ -21,8 +21,9 @@
   <!--管理者ログイン時-->
   <% else %>
       <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
-        <a href="<%= admins_root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
+        <%= image_tag 'logo_white_s.png', class: 'logo' %>
         <ul class="d-flex list-unstyled m-0 menu__basic">
+          <li><%= link_to 'ユーザー', admins_root_path, class: 'text-decoration-none text-ivory' %></li>
           <li><%= link_to 'レシピ', admins_recipes_path, class: 'text-decoration-none text-ivory' %></li>
           <li><%= link_to 'アイテム', admins_equipments_path, class: 'text-decoration-none text-ivory' %></li>
           <li><%= link_to 'ノート', admins_notes_path, class: 'text-decoration-none text-ivory' %></li>

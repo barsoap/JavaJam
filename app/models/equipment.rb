@@ -16,4 +16,8 @@ class Equipment < ApplicationRecord
     end
   end
 
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :evaluation, presence: true
+
 end

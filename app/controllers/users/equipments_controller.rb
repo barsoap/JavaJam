@@ -1,4 +1,6 @@
 class Users::EquipmentsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     case params[:sort]
       when 'equipment_latest'
