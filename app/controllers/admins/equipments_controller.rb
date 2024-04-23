@@ -5,6 +5,8 @@ class Admins::EquipmentsController < ApplicationController
 
   def show
     @equipment = Equipment.find(params[:id])
+  rescue  ActiveRecord::RecordNotFound
+    redirect_to admins_equipments_path
   end
 
   def destroy

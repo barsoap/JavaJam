@@ -130,3 +130,11 @@ footer {
   background-color: #756B57;
   color: #fff;
 }
+
+// バリデーションメッセージ欄
+.validate-errors-message {
+  border: 2px dashed #F5B73B;
+  background-color: rgba(255, 183, 59 , .3);
+  padding: 1rem;
+  margin: 1rem 0;
+}

@@ -1,5 +1,6 @@
 class Users::RecipesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
     @tags = Tag.take(10)
@@ -37,7 +38,7 @@ class Users::RecipesController < ApplicationController
       @recipe.save_tags(params[:recipe][:tags]) if params[:recipe][:tags].present?
       redirect_to recipe_path(@recipe)
     else
-      render :edit
+      render :new
     end
   end
 
@@ -70,6 +71,14 @@ class Users::RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:user_id, :title, :contents, :recipe_image, :evaluation,
                                   recipe_processes_attributes: [:id, :process, :description, :recipe_process_image, :_destroy])
+  end
+
+  #アクセス制限
+  def is_matching_login_user
+    recipe = Recipe.find(params[:id])
+    unless recipe.user == current_user
+      redirect_to recipe_path
+    end
   end
 
 end

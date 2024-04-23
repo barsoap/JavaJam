@@ -3,16 +3,16 @@
 
     <div class="col">
       <h3 class="text-center pb-5">レシピ編集</h3>
-      <!--エラーメッセージ-->
-      <div class="text-center bg-primary">
-        <% if @recipe.errors.any? %>
-          <ul class="list-unstyled">
-            <% @recipe.errors.full_messages.each do |recipe| %>
+      <!--エラー文-->
+      <% if @recipe.errors.any? %>
+        <div class="text-center validate-errors-message">
+          <ul class="list-unstyled m-0">
+            <% @recipe.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
       <%= form_with model: @recipe, url: recipe_path(@recipe), method: :patch do |f| %>
         <!--レシピタイトル-->

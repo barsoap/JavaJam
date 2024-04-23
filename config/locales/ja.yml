@@ -8,6 +8,11 @@ ja:
         email: "メールアドレス"
         profile: "プロフィール"
 
+      recipe:
+        title: "タイトル"
+        contents: "レシピ"
+        evaluation: "評価"
+
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

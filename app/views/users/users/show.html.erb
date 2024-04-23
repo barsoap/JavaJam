@@ -12,9 +12,11 @@
           </div>
         </div>
       <% end %>
-      <div id="follow-btn" class="mt-3 text-center">
-        <%= render 'users/follows/btn', user: @user %>
-      </div>
+      <% if user_signed_in? %>
+        <div id="follow-btn" class="mt-3 text-center">
+          <%= render 'users/follows/btn', user: @user %>
+        </div>
+      <% end %>
       <div class="mt-3 text-center">
         <%= link_to 'Friend List', user_follows_path(@user), class: 'btn btn-outline-secondary' %>
       </div>

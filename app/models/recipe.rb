@@ -39,7 +39,9 @@ class Recipe < ApplicationRecord
     end
   end
 
-  # validates :title, presence: true
-  # validates :contents, prensence: true
+  validates :title, presence: true
+  validates :contents, presence: true
+  validates :evaluation, presence: true
+
 
 end

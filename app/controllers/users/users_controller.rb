@@ -1,5 +1,6 @@
 class Users::UsersController < ApplicationController
-  # before_action :is_matching_login_customer, only: [:withdrow, :update]
+  before_action :authenticate_user!, except: [:show]
+  before_action :is_matching_login_user, only: [:withdrow, :update]
   before_action :ensure_guest_user, only: [:edit]
 
   def show
