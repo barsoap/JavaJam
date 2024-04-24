@@ -5,6 +5,9 @@ class Users::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @recipes = Recipe.find_by(user_id: @user)
+    @equipments = Equipment.find_by(user_id: @user)
+    @notes = Note.find_by(user_id: @user)
   end
 
   def edit
