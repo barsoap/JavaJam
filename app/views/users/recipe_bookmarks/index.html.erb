@@ -1,7 +1,7 @@
 <div class="container py-5">
   <h2><i class="h4 fa-solid fa-star"></i> Recipe Bookmarks</h2>
   <hr>
-  <div class="row">
+  <div class="row pb-3">
     <% @bookmarks.each do |bookmark| %>
       <div class="col-md-6 col-lg-4 mb-3">
         <div class="card">
@@ -39,9 +39,5 @@
         });
       </script>
     <% end %>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <%#= paginate recipes %>
   </div>
 </div>
