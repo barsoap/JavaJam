@@ -29,8 +29,10 @@ Rails.application.routes.draw do
       end
     end
     get 'recipes/tags', to: 'recipes#recipe_tags'
+    get 'recipes/bookmarks', to: 'recipe_bookmarks#index'
     resources :recipes do
       resources :recipe_comments, only:[:create, :destroy]
+      resource :recipe_bookmarks, only:[:create, :destroy]
     end
     resources :notes
     resources :equipments

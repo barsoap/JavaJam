@@ -1,43 +1,43 @@
 <div class="row">
-    <% equipments.each do |equipment| %>
-      <div class="col-md-6 col-lg-4 mb-3">
-        <div class="card">
-          <% if equipment.equipment_image.attached? %>
-            <%= link_to (image_tag equipment.equipment_image, class: 'img-fluid note-img'), equipment_path(equipment.id) %>
-          <% else %>
-            <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), equipment_path(equipment.id) %>
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to equipment.name.truncate(10), equipment_path(equipment.id) %></h5>
-            <p class="card-text"><%= equipment.description.truncate(20) %></p>
-            <span id="evaluation-<%= equipment.id %>"></span>
-          </div>
-          <div class="card-footer text-right">
-            <small class="text-black-50">
-              <%= equipment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %>
-            </small>
-          </div>
+  <% equipments.each do |equipment| %>
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <% if equipment.equipment_image.attached? %>
+          <%= link_to (image_tag equipment.equipment_image, class: 'img-fluid note-img'), equipment_path(equipment.id) %>
+        <% else %>
+          <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), equipment_path(equipment.id) %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to equipment.name.truncate(10), equipment_path(equipment.id) %></h5>
+          <p class="card-text"><%= equipment.description.truncate(20) %></p>
+          <span id="evaluation-<%= equipment.id %>"></span>
+        </div>
+        <div class="card-footer text-right">
+          <small class="text-black-50">
+            <%= equipment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %>
+          </small>
         </div>
       </div>
-      <script>
-        $(document).ready(function(){
-          var elem = document.querySelector('#evaluation-<%= equipment.id %>');
-          if (elem == null) return;
+    </div>
+    <script>
+      $(document).ready(function(){
+        var elem = document.querySelector('#evaluation-<%= equipment.id %>');
+        if (elem == null) return;
 
-          elem.innerHTML = ""
-          raty(elem, {
-            starOn: "<%= asset_path('raty/star-on.png') %>",
-            starOff: "<%= asset_path('raty/star-off.png') %>",
-            starHalf: "<%= asset_path('raty/star-half.png') %>",
-            score: "<%= equipment.evaluation %>",
-            half: true,
-            readOnly: true
-          });
+        elem.innerHTML = ""
+        raty(elem, {
+          starOn: "<%= asset_path('raty/star-on.png') %>",
+          starOff: "<%= asset_path('raty/star-off.png') %>",
+          starHalf: "<%= asset_path('raty/star-half.png') %>",
+          score: "<%= equipment.evaluation %>",
+          half: true,
+          readOnly: true
         });
-      </script>
-    <% end %>
-  </div>
+      });
+    </script>
+  <% end %>
+</div>
 
-  <div class="d-flex justify-content-center">
-    <%= paginate equipments %>
-  </div>
+<div class="d-flex justify-content-center">
+  <%= paginate equipments %>
+</div>

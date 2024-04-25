@@ -1,0 +1,43 @@
+<div class="container py-5">
+  <h2><i class="h4 fa-solid fa-star"></i> Recipe Bookmarks</h2>
+  <hr>
+  <div class="row pb-3">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="col-md-6 col-lg-4 mb-3">
+        <div class="card">
+          <% if bookmark.recipe.recipe_image.attached? %>
+            <%= link_to (image_tag bookmark.recipe.recipe_image, class: 'img-fluid note-img'), recipe_path(bookmark.recipe.id) %>
+          <% else %>
+            <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(bookmark.recipe.id) %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to bookmark.recipe.title.truncate(10), recipe_path(bookmark.recipe.id) %></h5>
+            <p class="card-text"><%= bookmark.recipe.contents.truncate(20) %></p>
+            <span id="evaluation-<%= bookmark.recipe.id %>"></span>
+          </div>
+          <div class="card-footer text-right">
+            <small class="text-black-50">
+              <%= bookmark.recipe.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %>
+            </small>
+          </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function(){
+          var elem = document.querySelector('#evaluation-<%= bookmark.recipe.id %>');
+          if (elem == null) return;
+
+          elem.innerHTML = ""
+          raty(elem, {
+            starOn: "<%= asset_path('raty/star-on.png') %>",
+            starOff: "<%= asset_path('raty/star-off.png') %>",
+            starHalf: "<%= asset_path('raty/star-half.png') %>",
+            score: "<%= bookmark.recipe.evaluation %>",
+            half: true,
+            readOnly: true
+          });
+        });
+      </script>
+    <% end %>
+  </div>
+</div>

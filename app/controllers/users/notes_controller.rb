@@ -1,6 +1,15 @@
 class Users::NotesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
+  def index
+    @notes = Note.page(params[:page]).per(12).order(created_at: :desc)
+  end
+
+  def show
+    @note = Note.find(params[:id])
+  end
+  
   def new
     @note = Note.new
   end
@@ -13,14 +22,6 @@ class Users::NotesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def index
-    @notes = Note.all
-  end
-
-  def show
-    @note = Note.find(params[:id])
   end
 
   def edit
@@ -48,5 +49,13 @@ class Users::NotesController < ApplicationController
   private
   def note_params
     params.require(:note).permit(:user_id, :title, :contents)
+  end
+
+  #アクセス制限
+  def is_matching_login_user
+    note = Note.find(params[:id])
+    unless note.user == current_user
+      redirect_to note_path
+    end
   end
 end

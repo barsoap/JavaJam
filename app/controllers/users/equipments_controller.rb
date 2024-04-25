@@ -1,5 +1,6 @@
 class Users::EquipmentsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
     case params[:sort]
@@ -59,6 +60,14 @@ class Users::EquipmentsController < ApplicationController
   private
   def equipment_params
     params.require(:equipment).permit(:user_id, :name, :description, :evaluation, :equipment_image)
+  end
+
+  #アクセス制限
+  def is_matching_login_user
+    equipment = Equipment.find(params[:id])
+    unless equipment.user == current_user
+      redirect_to equipment_path
+    end
   end
 
 end

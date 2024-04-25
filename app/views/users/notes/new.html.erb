@@ -4,15 +4,15 @@
     <div class="col-md-8">
       <h3 class="text-center pb-5">ノート投稿</h3>
       <!--エラー文-->
-      <div class="text-center bg-primary">
-        <% if @note.errors.any? %>
-          <ul class="list-unstyled">
+      <% if @note.errors.any? %>
+        <div class="text-center validate-errors-message">
+          <ul class="list-unstyled m-0">
             <% @note.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
 
       <%= form_with model: @note, url: notes_path, method: :post do |f| %>
       <!--タイトル-->

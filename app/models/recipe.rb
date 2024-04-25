@@ -7,9 +7,14 @@ class Recipe < ApplicationRecord
   has_many :recipe_comments, dependent: :destroy
   has_many :recipe_tags, dependent: :destroy
   has_many :tags, through: :recipe_tags
+  has_many :recipe_bookmarks, dependent: :destroy
 
   #recipe_processes(cocoon)
   accepts_nested_attributes_for :recipe_processes, reject_if: :all_blank, allow_destroy: true
+
+  def bookmark_exist?(current_user, recipe)
+    RecipeBookmark.find_by(user_id: current_user.id, recipe_id: recipe.id).nil?
+  end
 
   #検索メソッド
   def self.search_for(content,method)

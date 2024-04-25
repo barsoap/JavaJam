@@ -1,0 +1,5 @@
+<% unless recipe.bookmark_exist?(current_user, recipe) %>
+  <%= link_to '<i class="fa-solid fa-star fa-fw fa-2x"></i>'.html_safe, recipe_recipe_bookmarks_path(recipe), method: :delete, remote: true %>
+<% else %>
+  <%= link_to '<i class="fa-regular fa-star fa-fw fa-2x"></i>'.html_safe, recipe_recipe_bookmarks_path(recipe), method: :post, remote: true %>
+<% end %>

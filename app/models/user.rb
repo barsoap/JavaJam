@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :equipments, dependent: :destroy
   has_many :recipe_comments, dependent: :destroy
   has_many :follows
+  has_many :recipe_bookmarks, dependent: :destroy
 
   # フォローユーザーの検索
   #   フォロー済みの場合、ユーザーデータを返す
