@@ -57,6 +57,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+gem "cocoon"
+
 gem 'image_processing', '~> 1.2'
 
 gem 'dotenv-rails'
@@ -66,3 +68,5 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+
+gem 'kaminari','~> 1.2.1'

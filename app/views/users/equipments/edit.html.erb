@@ -1,0 +1,96 @@
+<div class="container py-5">
+  <div class="row">
+
+    <div class="col">
+      <h3 class="text-center pb-5">アイテム編集</h3>
+      <!--エラー文-->
+      <% if @equipment.errors.any? %>
+        <div class="text-center validate-errors-message">
+          <ul class="list-unstyled m-0">
+            <% @equipment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form_with model: @equipment, url: equipment_path(@equipment), method: :patch do |f| %>
+        <!--アイテム名-->
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :name, 'アイテム', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_field :name, class: 'form-control'%>
+            </div>
+          </div>
+        </div>
+        <!--画像追加-->
+        <div class="form-group">
+          <div class="row">
+            <div class="offset-0 offset-md-4 col-md-8">
+              <div class="custom-file">
+                <%= f.file_field :equipment_image, accept: "image/*", class: 'custom-file-input', onchange: 'fileOnChange(this);' %>
+                <%= f.label :equipment_image, '選択してください', class: 'custom-file-label' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--説明-->
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <%= f.label :description, '説明', class: 'm-0' %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_area :description, class: 'form-control', rows: 10 %>
+            </div>
+          </div>
+        </div>
+        <!--評価(raty)-->
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4 d-flex justify-content-start justify-content-md-end align-items-center">
+              <label class="m-0">評価</label>
+            </div>
+            <div class="col-md-8"><!--星の画像のところ-->
+              <span id="evaluation"></span>
+            </div>
+          </div>
+        </div>
+        <!--変更ボタン-->
+        <div class="form-group">
+          <div class="row mt-3">
+            <div class="col-md-8 offset-0 offset-md-4">
+              <button type="submit" class="btn btn-primary btn-block">内容を変更する</button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+//ratyの星
+  $(document).ready(function(){
+    let elem = document.querySelector('#evaluation');
+    if (elem == null) return;
+
+    elem.innerHTML = ""
+    raty(elem, {
+      starOn: "<%= asset_path('raty/star-on.png') %>",
+      starOff: "<%= asset_path('raty/star-off.png') %>",
+      starHalf: "<%= asset_path('raty/star-half.png') %>",
+      scoreName: "equipment[evaluation]",
+      score: "<%= @equipment.evaluation %>",
+      half: true
+    });
+  });
+
+//画像の名前/以降が表示されるようにする
+  function fileOnChange (elem) {
+    $(elem).next('.custom-file-label').html($(elem).val().split('\\').pop());
+  };
+</script>

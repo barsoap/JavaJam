@@ -1,0 +1,40 @@
+<div class="container pb-5">
+
+  <div class="col">
+    <h3 class="mt-5">会員一覧</h3>
+    <table class="table table-hover mt-3">
+      <tead class="thead-light">
+        <tr>
+          <th scope="col">会員ID</th>
+          <th scope="col">ユーザー名</th>
+          <th scope="col">メールアドレス</th>
+          <th scope="col">会員ステータス</th>
+          <th scope="col"></th>
+        </tr>
+      </tead>
+      <% @users.each do |user| %>
+        <tbody>
+          <tr>
+            <td><%= user.id %></td>
+            <td class="font-weight-bold"><%= link_to (user.name), admins_user_path(user), class: 'text-dark' %></td>
+            <td><%= user.email %></td>
+            <td>
+              <% if user.is_active == true %>
+                <p class="m-0 text-success">有効会員</p>
+              <% else %>
+                <p class="m-0 text-danger">退会済</p>
+              <% end %>
+            </td>
+            <td><%= link_to '退会させる', edit_admins_user_path(user), class: 'btn btn-danger btn-sm' %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @users %>
+    </div>
+
+  </div>
+
+</div>

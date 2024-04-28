@@ -8,6 +8,20 @@ ja:
         email: "メールアドレス"
         profile: "プロフィール"
 
+      recipe:
+        title: "タイトル"
+        contents: "レシピ"
+        evaluation: "評価"
+
+      equipment:
+        name: "名前"
+        description: "説明"
+        evaluation: "評価"
+
+      note:
+        title: "タイトル"
+        contents: "内容"
+
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

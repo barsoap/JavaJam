@@ -1,0 +1,22 @@
+<div class="container py-5">
+  <h3 class="mt-4 mb-3"><i class="fa-solid fa-book-open"></i> ノート一覧</h3>
+  <div class="row my-3">
+    <div class="col-md-4">
+      <%= form_tag(notes_path, method: :get) do %>
+        <%= select_tag :sort,
+                  options_for_select(
+                    [
+                      ['投稿新しい順', 'note_latest'],
+                      ['投稿古い順', 'note_oldest']
+                    ], params[:sort]),
+                    {
+                      include_blank: '並び替え',
+                      class: 'form-control',
+                      onchange: 'submit(this.form)'
+                    }
+        %>
+      <% end %>
+    </div>
+  </div>
+  <%= render 'index', notes: @notes %>
+</div>

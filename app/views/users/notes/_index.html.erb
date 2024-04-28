@@ -1,0 +1,28 @@
+<div class="row">
+  <% notes.each do |note| %>
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <% if note.note_image.attached? %>
+          <%= link_to (image_tag note.note_image, class: 'img-fluid note-img'), note_path(note.id) %>
+        <% else %>
+          <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), note_path(note.id) %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to note.title.truncate(10), note_path(note.id) %></h5>
+          <p class="card-text"><%= note.contents.truncate(20) %></p>
+        </div>
+        <div class="card-footer text-right">
+          <small class="text-black-50">
+            <%= note.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %>
+          </small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% unless controller_name == 'searchs' %>
+  <div class="d-flex justify-content-center">
+    <%= paginate notes %>
+  </div>
+<% end %>

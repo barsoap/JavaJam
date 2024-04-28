@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+// TurbolinksがONの場合、同一のidまたはclassでRatyが反応しなくなるため、OFFとする。
+// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "script.js"
@@ -18,6 +19,15 @@ import 'swiper/swiper-bundle.css';  //Swiper
 
 window.Swiper = Swiper;
 
+import Raty from "./raty.js" //raty
+window.raty = function(elem,opt) {
+  let raty =  new Raty(elem,opt)
+  raty.init();
+  return raty;
+}
+
+require("@nathanvda/cocoon") //cocoon
+
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()

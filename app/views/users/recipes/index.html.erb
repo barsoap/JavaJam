@@ -1,0 +1,38 @@
+<div class="container py-5">
+  <h3 class="pt-4"><i class="fa-solid fa-tags mr-2"></i> レシピタグ</h3>
+  <div class="mb-3">
+    <%= link_to 'すべてのタグを見る', recipes_tags_path, class: 'btn btn-sm btn-outline-secondary' %>
+  </div>
+  <div class="tags">
+    <ul class="list-unstyled d-flex flex-wrap">
+      <% @tags.each do |tag| %>
+        <% unless tag.recipes.count == 0 %>
+          <li class="mb-2"><span class="badge badge-secondary p-2"><%= link_to "#{tag.name} (#{tag.recipes.count})", recipes_path(tag_id: tag), class: 'text-white' %></span></li>
+        <% end %>
+      <% end %>
+    </ul>
+
+  </div>
+
+  <h3 class="mt-2 mb-3"><i class="fa-solid fa-mug-hot mr-2"></i> レシピ一覧</h3>
+  <div class="row my-3">
+    <div class="col-md-4">
+      <%= form_tag(recipes_path, method: :get) do %>
+        <%= select_tag :sort,
+                  options_for_select(
+                    [
+                      ['投稿新しい順', 'recipe_latest'],
+                      ['投稿古い順', 'recipe_oldest'],
+                      ['評価順', 'evaluation']
+                    ], params[:sort]),
+                    {
+                      include_blank: '並び替え',
+                      class: 'form-control',
+                      onchange: 'submit(this.form)'
+                    }
+        %>
+      <% end %>
+    </div>
+  </div>
+  <%= render 'index', recipes: @recipes %>
+</div>
