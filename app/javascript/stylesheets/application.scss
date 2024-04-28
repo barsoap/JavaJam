@@ -69,8 +69,13 @@ footer {
 // トップスライダー
 .top-slider-img {
   width: 100%;
-  height: calc((100vh - 150px - 56px) / 2);
+  height: calc((100vh - 150px) / 1.75);
   object-fit: cover;
+}
+@media screen and (max-width: 575.98px) { // スマートフォン版
+  .top-slider-img {
+    height: calc((100vh - 150px) / 3);
+  }
 }
 
 // ノート画像
@@ -85,6 +90,7 @@ footer {
   bottom: 10px;
   right: 10px;
   padding: 10px;
+  z-index: 99999;
 }
 
 .balloon{
@@ -93,6 +99,7 @@ footer {
   padding: 10px;
   background: rgba(75, 72, 67, .8);
   text-align: center;
+  z-index: 99999;
 }
 
 // 淹れ方画像
@@ -144,4 +151,54 @@ footer {
 .user-links > a:hover,
 .text-brown {
   color: #756B57;
+}
+
+// トップ関連
+#square__warp {
+  height: 280px; // FIXME
+}
+
+@media screen and (max-width: 575.98px) { // スマートフォン版
+  #square__warp {
+    height: 350px; // FIXME
+  }
+}
+
+
+#square__title {
+  font-size: 80px; // FIXME
+  margin: 0;
+}
+
+#square__title {
+  z-index: 1;
+}
+
+#square__contents {
+  border: 3px solid #937758;
+  padding: 10px;
+  margin-top: 80px;
+  margin-left: 20%;
+}
+
+#square__box {
+  background-color: #BDA890;
+  height: 80px;
+  width: 300px;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+
+#bookmark__rank {
+  height: 90%;
+}
+
+#marker__white {
+  background: linear-gradient(transparent 70%, #F2F1E6 30%);
+  display: inline-block;
+}
+
+#marker__brown {
+  background: linear-gradient(transparent 70%, #C99C53 30%);
+  display: inline-block;
 }

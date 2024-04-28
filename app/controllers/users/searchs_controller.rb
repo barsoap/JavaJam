@@ -7,13 +7,13 @@ class Users::SearchsController < ApplicationController
 
     #ユーザー検索
     if @model == 'user'
-      @records = User.search_for(@content, @method)
+      @records = User.search_for(@content)
     elsif @model == 'recipe'
-      @records = Recipe.search_for(@content, @method)
+      @records = Recipe.search_for(@content)
     elsif @model == 'equipment'
-      @records = Equipment.search_for(@content, @method)
+      @records = Equipment.search_for(@content)
     elsif @model == 'note'
-      @records = Note.search_for(@content, @method)
+      @records = Note.search_for(@content)
     end
   end
 

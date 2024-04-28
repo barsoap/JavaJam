@@ -4,16 +4,9 @@ class Equipment < ApplicationRecord
 
   belongs_to :user
 
-  def self.search_for(content,method) #検索メソッド
-    if method == 'perfect'
-      Equipment.where(name: content)
-    elsif method == 'forward'
-      Equipment.where('name LIKE?', content + '%')
-    elsif method == 'backword'
-      Equipment.where('name LIKE ?', '%' + content)
-    else
-      Equipment.where('name LIKE ?', '%' + content + '%')
-    end
+  #検索メソッド
+  def self.search_for(content)
+    Equipment.where('name LIKE ?', '%' + content + '%')
   end
 
   validates :name, presence: true

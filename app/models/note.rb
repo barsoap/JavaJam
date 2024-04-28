@@ -4,16 +4,9 @@ class Note < ApplicationRecord
 
   belongs_to :user
 
-  def self.search_for(content, method) #検索メソッド
-    if method == 'perfect'
-      Note.where(title: content)
-    elsif method == 'forward'
-      Note.where('title LIKE ?', content + '%')
-    elsif method == 'backward'
-      Note.where('title LIKE ?', '%' + content)
-    else
-      Note.where('title LIKE ?', '%' + content + '%')
-    end
+  #検索メソッド
+  def self.search_for(content)
+    Note.where('title LIKE ?', '%' + content + '%')
   end
 
   validates :title, presence: true

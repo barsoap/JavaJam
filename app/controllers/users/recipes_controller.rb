@@ -1,11 +1,11 @@
 class Users::RecipesController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :recipe_tags]
   before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
     @tags = Tag.take(10)
     if params[:tag_id]
-      @recipes = Tag.find(params[:tag_id]).recipes
+      @recipes = Tag.find(params[:tag_id]).recipes.page(params[:page]).per(12)
     else
       case params[:sort]
       when 'recipe_latest'

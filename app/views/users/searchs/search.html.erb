@@ -1,21 +1,22 @@
-<div class="container py-5">
+<div class="container mt-4 py-5">
 
     <!--検索結果を表示-->
     <% if @model == 'user'%>
-      <h3 class="mb-3">ユーザー検索結果："<%= @content %>"</h3>
+      <h3 class="mb-3">ユーザー検索結果： <%= @content %></h3>
+      <hr>
       <%= render 'users/users/index', users: @records %>
     <% elsif @model == 'recipe' %>
-      <h3 class="mb-3">レシピ検索結果："<%= @content %>"</h3>
+      <h3 class="mb-3">レシピ検索結果： <%= @content %></h3>
+      <hr>
       <%= render 'users/recipes/index', recipes: @records %>
     <% elsif @model == 'equipment' %>
-      <h3 class="mb-3">アイテム検索結果："<%= @content %>"</h3>
+      <h3 class="mb-3">アイテム検索結果： <%= @content %></h3>
+      <hr>
       <%= render 'users/equipments/index', equipments: @records %>
     <% else %>
-      <h3 class="mb-3">ノート一覧："<%= @content %>"</h3>
-      <!--< unless @records = nil %>-->
-        <%= render 'users/notes/index', notes: @records %>
-      <!--< else %>-->
-        <!--<h4 class="mb-5">検索結果：なし</h4>-->
+      <h3 class="mb-3">ノート一覧： <%= @content %></h3>
+      <hr>
+      <%= render 'users/notes/index', notes: @records %>
     <% end %>
 </div>
 

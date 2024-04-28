@@ -21,6 +21,8 @@
   <% end %>
 </div>
 
-<div class="d-flex justify-content-center">
-  <%= paginate notes %>
-</div>
+<% unless controller_name == 'searchs' %>
+  <div class="d-flex justify-content-center">
+    <%= paginate notes %>
+  </div>
+<% end %>
