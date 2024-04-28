@@ -40,9 +40,14 @@
       </nav>
   <% end %>
 
-  <!--<div class="d-flex justify-content-end">-->
-    <%#= render 'users/searchs/form' %>
-  <!--</div>-->
+  <!--検索バー-->
+  <% unless controller_name == 'sessions' || controller_name == 'registrations' %>
+    <div class="container py-3">
+      <div class="d-flex justify-content-end">
+        <%= render 'users/searchs/form' %>
+      </div>
+    </div>
+  <% end %>
 
 </header>
 

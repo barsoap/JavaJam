@@ -22,30 +22,38 @@
   </div>
 </div>
 <!--コンテンツ部分-->
-<div class="container py-5">
-  <div class="col-12 left-side ">
-    <h1 class="fa-fw fa-3x">JavaJam</h1>
-    <p class="fa-fw fa-3x">美味しいドリップコーヒーのレシピをシェアしたり、ドリップコーヒーを愉しむ人たちが交流できるサイトです。</p>
+<div class="container py-md-4">
+  <!--キャッチコピー-->
+  <div id="square__warp" class="position-relative">
+    <h1 id="square__title" class="position-absolute">JavaJam</h1>
+    <div id="square__box" class="position-absolute"></div>
+    <div id="square__contents" class="position-absolute">
+      淹れたてコーヒー。最後の一滴まで美味しい。<br>
+      あなたに最高の一杯を愉しんでいただきたい。<br>
+      <h2 id="marker__white">Enjoy Coffee Life.</h2>
+    </div>
   </div>
 
+
   <!--レシピブックマーク順-->
-  <div class="row">
-    <div class="col-4">
-      <div class="col-12 bg-primary">
-        <h3 class=""><i class="fa-solid fa-crown"></i> 人気のレシピ</h3>
-        <p>ブックマーク数が多い人気のレシピです！</p>
-        <p>自分好みのレシピを見つけよう</p>
+  <div class="row pt-md-5">
+    <div class="col-md-4 bg-primary mb-3 mb-md-0">
+      <div id="bookmark__rank" class="py-5">
+        <h3 id="marker__brown"><i class="fa-solid fa-crown"></i> 人気レシピ</h3>
+        <p class="pt-5">ブックマーク数が多い人気のレシピです</p>
+        <p>普段とちがう淹れ方で</p>
+        <p>味の変化を楽しんで！</p>
       </div>
     </div>
     <!--swiper部分-->
-    <div class="col-8">
+    <div class="col-md-8">
       <div class="swiper bookmark-slides">
         <div class="swiper-wrapper">
           <% @recipes.each_slice(2) do |recipes| %>
-            <div class="swiper-slide p-5">
+            <div class="swiper-slide p-md-5">
               <div class="row">
                 <% recipes.each do |recipe| %>
-                  <div class="col-md-6 mb-3">
+                  <div class="col-md-12 col-lg-6 mb-3">
                     <div class="card">
                       <% if recipe.recipe_image.attached? %>
                         <%= link_to (image_tag recipe.recipe_image, class: 'img-fluid note-img'), recipe_path(recipe.id) %>
@@ -90,11 +98,71 @@
 
   </div>
 
+  <% if user_signed_in? %>
+    <!--フォローしたユーザーの新着投稿-->
+    <div class="col py-5">
+      <h3>フォローユーザーの新着投稿</h3>
+      <hr>
+    <!--レシピ-->
+      <div class="">
+        <h4><i class="fa-solid fa-mug-hot"></i> 新規レシピ</h4>
+          <div class="row">
+          <% @bm_recipes.each do |recipe| %>
+            <div class="col-md-6 col-lg-4 mb-3">
+              <div class="card">
+                <% if recipe.recipe_image.attached? %>
+                  <%= link_to (image_tag recipe.recipe_image, class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+                <% else %>
+                  <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %></h5>
+                  <p class="card-text"><%= recipe.contents.truncate(20) %></p>
+                  <span id="evaluation-bm-<%= recipe.id %>"></span>
+                </div>
+                <div class="card-footer text-right">
+                  <small class="text-black-50">
+                    <%= recipe.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %>
+                  </small>
+                </div>
+              </div>
+            </div>
+            <script>
+              $(document).ready(function(){
+                var elem = document.querySelector('#evaluation-bm-<%= recipe.id %>');
+                if (elem == null) return;
 
-  <!--フォローしたユーザーの新着投稿-->
-  <!--<div class="row">-->
-
-  <!--</div>-->
+                elem.innerHTML = ""
+                raty(elem, {
+                  starOn: "<%= asset_path('raty/star-on.png') %>",
+                  starOff: "<%= asset_path('raty/star-off.png') %>",
+                  starHalf: "<%= asset_path('raty/star-half.png') %>",
+                  score: "<%= recipe.evaluation %>",
+                  half: true,
+                  readOnly: true
+                });
+              });
+            </script>
+          <% end %>
+          </div>
+      </div>
+    </div>
+  <% else %>
+  <!--新規登録のリンク-->
+    <div class="col">
+      <hr>
+      <div class="d-flex align-items-center flex-column py-5">
+        <div>
+          <h2 id="marker__white">新規登録してお気に入りのレシピやユーザーを見つけよう</h3>
+        </div>
+        <div class="py-5">
+          <%= link_to new_user_registration_path ,class: 'btn btn-primary rounded-pill p-3' do %>
+            <h3 class="m-0">新規登録はコチラ</h1>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <script>
