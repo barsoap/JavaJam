@@ -18,7 +18,7 @@ class Recipe < ApplicationRecord
 
   #検索メソッド
   def self.search_for(content)
-    Recipe.where('title LIKE ?', '%' + content + '%')
+    Recipe.where('title LIKE ? OR contents LIKE ?', "%#{content}%", "%#{content}%")
   end
 
   #タグ
