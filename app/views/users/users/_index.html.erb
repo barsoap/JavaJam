@@ -4,8 +4,8 @@
       <% users.each do |user| %>
       <tbody>
         <tr>
-          <td class="pr-3"><%= link_to (image_tag user.get_profile_image(40,40), class: 'rounded-circle img-fluid d-block mx-auto'), user_path(user.id) %></td>
-          <td class="pr-3"><%= link_to (user.name), user_path(user.id) %></td>
+          <td class="pr-3 pb-3"><%= link_to (image_tag user.get_profile_image(40,40), class: 'rounded-circle img-fluid d-block mx-auto'), user_path(user.id) %></td>
+          <td class="pr-3 pb-3"><%= link_to (user.name), user_path(user.id) %></td>
         </tr>
       </tbody>
       <% end %>

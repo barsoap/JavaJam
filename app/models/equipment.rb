@@ -6,7 +6,7 @@ class Equipment < ApplicationRecord
 
   #検索メソッド
   def self.search_for(content)
-    Equipment.where('name LIKE ?', '%' + content + '%')
+    Equipment.where('name LIKE ? OR description LIKE ?', "%#{content}%", "%#{content}%")
   end
 
   validates :name, presence: true

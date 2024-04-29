@@ -6,7 +6,7 @@ class Note < ApplicationRecord
 
   #検索メソッド
   def self.search_for(content)
-    Note.where('title LIKE ?', '%' + content + '%')
+    Note.where('title LIKE ? OR contents LIKE ?', "%#{content}%", "%#{content}%")
   end
 
   validates :title, presence: true

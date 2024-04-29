@@ -40,7 +40,7 @@ recipes = [
 3投目：60%
 EOS
       evaluation: 5,
-      tags: "ペーパドリップ ホットコーヒー",
+      tags: "ペーパードリップ ホットコーヒー",
       recipe_processes: [
         {
           process: "①ドリッパーを温める",
@@ -98,7 +98,7 @@ EOS
 お湯：84℃
 EOS
       evaluation: 5,
-      tags: "ペーパドリップ ホットコーヒー",
+      tags: "ペーパードリップ ホットコーヒー",
       recipe_processes: [
         {
           process: "①ドリッパーにペーパーをセット",
@@ -144,15 +144,17 @@ recipes.each do |recipe|
       r.evaluation = recipe_recipe[:evaluation]
     end
 
-    recipe_recipe_data.save_tags(recipe_recipe[:tags]) if recipe_recipe_data.save
-
-    recipe_recipe_data.recipe_image.attach(io: File.open(Rails.root.join("db/seeds/#{recipe_recipe[:image]}")),
-                  filename: recipe_recipe[:image]) if recipe_recipe_data.save
+    if recipe_recipe_data.save
+      recipe_recipe_data.save_tags(recipe_recipe[:tags])
+      recipe_recipe_data.recipe_image.attach(io: File.open(Rails.root.join("db/seeds/#{recipe_recipe[:image]}")),
+                    filename: recipe_recipe[:image])
+    end
 
     recipe_recipe[:recipe_processes].each do |recipe_recipe_recipe_process|
-      recipe_recipe_data.recipe_processes.find_or_initialize_by(process: recipe_recipe_recipe_process[:process]) do |rp|
+      recipe_process_data = recipe_recipe_data.recipe_processes.find_or_initialize_by(process: recipe_recipe_recipe_process[:process]) do |rp|
         rp.description = recipe_recipe_recipe_process[:description]
       end
+      recipe_process_data.save
     end
   end
 end
@@ -205,16 +207,55 @@ end
 notes = [
   {
     user_id: User.find_by(email: 'user1@example.com').id,
-    title: "テスト1",
+    title: "コーヒーは豆の鮮度が命",
     contents: <<"EOS",
-テスト1
+コーヒーおいしく味わうために一番大切なのは何かみなさんご存じですか？
+コーヒーを淹れるとき、豆の種類や抽出に使うアイテムに気を配りドリップしますが
+実は、コーヒーの味にとって一番大切なのは豆の鮮度です！
+豆がどんなに高価でも焙煎されてから時間が経っていると本来の味と全く異なるものに変化してしまいます！
+逆に、それほど高いものでなくても鮮度に注意すればおいしく味わうことができるということになります。
+
+さらに、よくスーパーで売られているコーヒーなどは既に粉の状態にされているものが多いですが
+コーヒー豆は挽いて粉の状態にすると空気と触れ合う面積が増えて、酸化が早くなってしまいます。
+
+この「酸化」がコーヒーの味を変化させてしまう大きな要因です。
+
+よりおいしいコーヒーを楽しむには、豆の状態で購入してドリップする直前にミルで豆を挽くことがオススメです！
+少し金額を出す必要はありますが、味が激変するので挑戦してみてください♪
 EOS
   },
   {
     user_id: User.find_by(email: 'user2@example.com').id,
-    title: "テスト2",
+    title: "最初に買いそろえるアイテムは？",
     contents: <<"EOS",
-テスト2
+ハンドドリップを始めるときに揃えるべきグッズを紹介します！
+結論から話すと、次の4つのアイテムがあればおうちコーヒーを楽しむことができます♪
+・コーヒースケール
+・コーヒーサーバー
+・ドリッパー
+・ミル
+
+それぞれのアイテムについて紹介します！
+・コーヒースケール
+　コーヒースケールは簡単に言うと計りとタイマーが合体したようなものです。
+普通のタイマーやスケールと違うのは抽出量と抽出時時間を同時に計ることができる点です。
+コーヒーにとっては蒸らし時間だったり抽出量をきちんと計ることがことが非常に大切です。
+コーヒースケールなしでもコーヒーを作ることはできますがこれがあると非常に便利ですので、使ってみてください！
+
+・コーヒーサーバー
+　形がフラスコみたいやつですね！
+これは一人分で楽しむ場合は必要ないですが、たくさん抽出する場合はあると便利です。
+経験談ですが、コーヒーサーバーはガラス製のものだと割れたりしてしまうので、プラスチック製のものがオススメです。
+
+・ドリッパー
+　これはペーパーに粉を置いてお湯を注ぐためのものです。
+それぞれの形状で抽出の味わいが違うとも言われ、さらにプラスチック製のものや陶器製のもの様々な展開があり悩ましいですが、
+見た目が好きなものや単純にコスパのいいものを用意してください！
+
+・ミル
+　ミルはコーヒー豆を粉にするための道具です。
+ミルは他の３つより価格が高いので、後回しにしてもいいと思います！
+さらに手動や電動のものがありますが、個人的にはTIMEMOREから販売されている手動ミルが価格に対して性能が高くオススメです！
 EOS
   },
 ]
