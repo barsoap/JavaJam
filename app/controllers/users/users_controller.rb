@@ -4,7 +4,8 @@ class Users::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id], is_active: true)
+    redirect_to root_path, alert: '存在しないユーザーです' and return if @user.nil?
     @recipes = Recipe.where(user_id: @user)
     @equipments = Equipment.where(user_id: @user)
     @notes = Note.where(user_id: @user)

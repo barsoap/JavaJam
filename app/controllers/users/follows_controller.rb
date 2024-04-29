@@ -2,8 +2,8 @@ class Users::FollowsController < ApplicationController
   before_action :set_user, only: [:show, :create, :destroy]
 
   def show
-    @follows = @user.followed(@user) # フォローしているユーザー一覧取得
-    @followers = User.where(id: @user.follower(@user).pluck(:follow_id)) # フォローされているユーザー一覧取得
+    @follows = @user.followed(@user).is_active #.where(is_active: true) # フォローしているユーザー一覧取得
+    @followers = User.where(id: @user.follower(@user).is_active.pluck(:follow_id)) # フォローされているユーザー一覧取得
   end
 
   def create

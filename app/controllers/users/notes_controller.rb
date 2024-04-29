@@ -9,7 +9,7 @@ class Users::NotesController < ApplicationController
   def show
     @note = Note.find(params[:id])
   end
-  
+
   def new
     @note = Note.new
   end
@@ -48,7 +48,7 @@ class Users::NotesController < ApplicationController
 
   private
   def note_params
-    params.require(:note).permit(:user_id, :title, :contents)
+    params.require(:note).permit(:user_id, :title, :contents, :note_image)
   end
 
   #アクセス制限
