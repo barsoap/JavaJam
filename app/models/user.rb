@@ -61,7 +61,7 @@ class User < ApplicationRecord
 
   #検索メソッド
   def self.search_for(content)
-    User.where('name LIKE ? AND is_active == true', "%#{content}%")
+    User.where('name LIKE ? AND is_active = true', "%#{content}%")
   end
 
   validates :name, presence: true
