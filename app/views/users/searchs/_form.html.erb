@@ -1,4 +1,4 @@
-<div id="search-wrap">
+<!--<div>-->
   <!--<%#= form_with url:search_path, method: :get, local: true do |f| %>-->
   <!--  <%#= f.text_field :content, class: 'form_control', value: params[:content] %>-->
   <!--  <%#= f.select :model,-->
@@ -8,17 +8,26 @@
   <!--  %>-->
   <!--  <%#= f.submit '検索', class: 'btn btn-primary', name: nil %>-->
   <!--<%# end %>-->
-  <div id="search-wrap">
-    <form role="search" method="get" action="">
-      <input type="text" value="" name="" id="search-text">
-    </form>
+<!--</div>-->
+<div id="search-wrap">
+    <%= form_with url:search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :content, class: 'form_control',　id: "search-text", value: params[:content], placeholder: "内容を入力" %>
+      <%= f.select :model,
+                         options_for_select({'ユーザー'=>'user','レシピ'=>'recipe','アイテム'=>'equipment','ノート'=>'note'}, params[:model]),
+                         class: 'form-control form-control-sm',
+                         id: "search-text"
+      %>
+      <%= f.submit '検索', class: 'btn btn-primary', name: nil %>
+    <% end %>
+
+    <!--<form role="search" method="get" action="">-->
+      <!--<input type="text" value="" name="" id="search-text">-->
+    <!--</form>-->
     <!--search-wrap-->
-  </div>
 </div>
 
 <style>
   /*========= 検索窓のためのCSS ===============*/
-
   /*検索窓のエリア*/
   #search-wrap {
     position: absolute;/*絶対配置にして*/
@@ -40,7 +49,6 @@
     outline: none;
     cursor: pointer;/*カーソルを指マークに*/
   }
-
   /*テキスト入力inputにフォーカスした時の形状*/
   #search-text:focus {
     width: 250px;/*テキスト入力エリアが伸びる後の横幅*/
