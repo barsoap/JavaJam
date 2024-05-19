@@ -10,6 +10,7 @@
   <!--<%# end %>-->
 <!--</div>-->
 <div id="search-wrap">
+  <div>
     <%= form_with url:search_path, method: :get, local: true do |f| %>
       <%= f.text_field :content, class: 'form_control',　id: "search-text", value: params[:content], placeholder: "内容を入力" %>
       <%= f.select :model,
@@ -24,6 +25,7 @@
       <!--<input type="text" value="" name="" id="search-text">-->
     <!--</form>-->
     <!--search-wrap-->
+  </div>
 </div>
 
 <style>
