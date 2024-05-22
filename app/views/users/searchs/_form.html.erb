@@ -12,13 +12,13 @@
 <div id="search-wrap">
   <div>
     <%= form_with url:search_path, method: :get, local: true do |f| %>
-      <%= f.text_field :content, class: 'form_control',　id: "search-text", value: params[:content], placeholder: "内容を入力" %>
-      <%= f.select :model,
+      <%= f.text_field :content, class: 'form_control', id: "search-text", value: params[:content], placeholder: "内容を入力" %>
+      <%#= f.select :model,
                          options_for_select({'ユーザー'=>'user','レシピ'=>'recipe','アイテム'=>'equipment','ノート'=>'note'}, params[:model]),
                          class: 'form-control form-control-sm',
                          id: "search-text"
       %>
-      <%= f.submit '検索', class: 'btn btn-primary', name: nil %>
+      <%#= f.submit '検索', class: 'btn btn-primary', name: nil, id: "search-text" %>
     <% end %>
 
     <!--<form role="search" method="get" action="">-->
@@ -43,9 +43,9 @@
     -webkit-appearance:none;/*SafariやChromeのデフォルトの設定を無効*/
     width: 60px;/*テキスト入力エリアが伸びる前の横幅*/
     height: 60px;
-    padding: 20px;
+    padding: 20px 20px 20px 40px;
     border: none;
-    background:#fff image("icon_search.svg") no-repeat 17px center;/*虫眼鏡アイコンを背景に表示*/
+    background: #fff url("<%= asset_path 'search.png' %>") no-repeat 17px center;/*虫眼鏡アイコンを背景に表示*/
     background-size: 25px 25px;
     transition: all 0.5s;/*transitionを使ってスムースに伸ばす*/
     outline: none;
@@ -53,7 +53,7 @@
   }
   /*テキスト入力inputにフォーカスした時の形状*/
   #search-text:focus {
-    width: 250px;/*テキスト入力エリアが伸びる後の横幅*/
+    width: 200px;/*テキスト入力エリアが伸びる後の横幅*/
     padding: 20px 0 20px 60px;
     box-shadow: 0 2px rgba(6,0,1,.26);
   }

@@ -1,23 +1,93 @@
 <div class="container mt-4 py-5">
 
     <!--検索結果を表示-->
-    <% if @model == 'user'%>
-      <h3 class="mb-3">ユーザー検索結果： <%= @content %></h3>
-      <hr>
-      <%= render 'users/users/index', users: @records %>
-    <% elsif @model == 'recipe' %>
-      <h3 class="mb-3">レシピ検索結果： <%= @content %></h3>
-      <hr>
-      <%= render 'users/recipes/index', recipes: @records %>
-    <% elsif @model == 'equipment' %>
-      <h3 class="mb-3">アイテム検索結果： <%= @content %></h3>
-      <hr>
-      <%= render 'users/equipments/index', equipments: @records %>
-    <% else %>
-      <h3 class="mb-3">ノート一覧： <%= @content %></h3>
-      <hr>
-      <%= render 'users/notes/index', notes: @records %>
-    <% end %>
+    <!--<%# if @model == 'user'%>-->
+    <!--  <h3 class="mb-3">ユーザー検索結果： <%= @content %></h3>-->
+    <!--  <hr>-->
+    <!--  <%#= render 'users/users/index', users: @records %>-->
+    <!--<%# elsif @model == 'recipe' %>-->
+    <!--  <h3 class="mb-3">レシピ検索結果： <%= @content %></h3>-->
+    <!--  <hr>-->
+    <!--  <%#= render 'users/recipes/index', recipes: @records %>-->
+    <!--<%# elsif @model == 'equipment' %>-->
+    <!--  <h3 class="mb-3">アイテム検索結果： <%= @content %></h3>-->
+    <!--  <hr>-->
+    <!--  <%#= render 'users/equipments/index', equipments: @records %>-->
+    <!--<%# else %>-->
+    <!--  <h3 class="mb-3">ノート一覧： <%= @content %></h3>-->
+    <!--  <hr>-->
+    <!--  <%#= render 'users/notes/index', notes: @records %>-->
+    <!--<%# end %>-->
+
+    <!--検索結果を表示-->
+    <div class="row">
+      <!--タブ-->
+      <div class="tabs">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link<%= params[:recipe_sort].blank? ? ' active' : '' %>" data-toggle="tab" href="#section1">ユーザー</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link<%= params[:recipe_sort] ? ' active' : '' %>" data-toggle="tab" href="#section2">レシピ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section3">アイテム</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#section4">ノート</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <!--セクション1(ユーザー)-->
+          <%# if @model == 'user'%>
+            <div id="section1" class="tab-pane fade py-3<%= params[:recipe_sort].blank? ? ' show active' : '' %>">
+              <h3 class="mb-3">ユーザー検索結果： <%= @content %></h3>
+              <hr>
+              <%= render 'users/users/index', users: @users %>
+            </div>
+          <!--セクション2(レシピ)-->
+          <%# elsif @model == 'recipe' %>
+            <div id="section2" class="tab-pane fade py-3<%= params[:recipe_sort] ? ' show active' : '' %>">
+              <h3 class="mb-3">レシピ検索結果： <%= @content %></h3>
+              <hr>
+              <%= form_tag(search_path, method: :get) do %>
+                <%= hidden_field_tag :content, params[:content] %>
+                <%= select_tag :recipe_sort,
+                          options_for_select(
+                            [
+                              ['投稿新しい順', 'recipe_latest'],
+                              ['投稿古い順', 'recipe_oldest'],
+                              ['評価順', 'evaluation']
+                            ], params[:recipe_sort]),
+                            {
+                              include_blank: '並び替え',
+                              class: 'form-control',
+                              onchange: 'submit(this.form)'
+                            }
+                %>
+              <% end %>
+              <%= render 'users/recipes/index', recipes: @recipes %>
+            </div>
+          <!--セクション3(アイテム)-->
+          <%# elsif @model == 'equipment' %>
+            <div id="section3" class="tab-pane fade py-3">
+              <h3 class="mb-3">アイテム検索結果： <%= @content %></h3>
+              <hr>
+              <%= render 'users/equipments/index', equipments: @equipments %>
+            </div>
+          <!--セクション4(ノート)-->
+          <%# else %>
+            <div id="section4" class="tab-pane fade py-3">
+              <h3 class="mb-3">ノート一覧： <%= @content %></h3>
+              <hr>
+              <%= render 'users/notes/index', notes: @notes %>
+            </div>
+          <%# end %>
+        </div>
+
+      </div>
+    </div>
 </div>
 
 
