@@ -3,23 +3,10 @@ class Users::SearchsController < ApplicationController
   def search
     @model = params[:model]
     @content = params[:content]
-    # @method = params[:method]
 
     #ユーザー検索
-    # if @model == 'user'
-    #   @records = User.search_for(@content)
-    # elsif @model == 'recipe'
-    #   @records = Recipe.search_for(@content)
-    # elsif @model == 'equipment'
-    #   @records = Equipment.search_for(@content)
-    # elsif @model == 'note'
-    #   @records = Note.search_for(@content)
-    # end
-
-
     @users = User.search_for(@content)
-
-
+    #レシピ検索
     case params[:recipe_sort]
     when 'recipe_latest'
       @recipes = Recipe.search_for(@content).order(created_at: :desc)
@@ -32,7 +19,7 @@ class Users::SearchsController < ApplicationController
     else
       @recipes = Recipe.search_for(@content).order(created_at: :desc)
     end
-
+    #アイテム検索
     case params[:equipment_sort]
     when 'equipment_latest'
       @equipments = Equipment.search_for(@content).order(created_at: :desc)
@@ -43,7 +30,7 @@ class Users::SearchsController < ApplicationController
     else
       @equipments = Equipment.search_for(@content).order(created_at: :desc)
     end
-
+    #ノート検索
     @notes = Note.search_for(@content)
 
   end
