@@ -17,12 +17,13 @@
   </div>
 
   <% if @note.note_image.attached? %>
-    <%= image_tag @note.note_image, class: 'img-fluid my-3' %>
+    <%= image_tag @note.note_image, class: 'img-fluid my-3 w-100' %>
   <% else %>
     <%= image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid my-3' %>
   <% end %>
   <div class="py-3 mb-3">
-    <%= simple_format(@note.contents, sanitize: true, class: 'm-0') %>
+    <%#= simple_format(@note.contents, sanitize: true, class: 'm-0') %>
+    <%= @note.contents %>
   </div>
 
 </div>

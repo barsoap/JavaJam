@@ -61,7 +61,9 @@
                         <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
                       <% end %>
                       <div class="card-body">
-                        <h5 class="card-title"><%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %></h5>
+                        <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= recipe.title %>">
+                          <%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %>
+                        </h5>
                         <p class="card-text"><%= recipe.contents.truncate(20) %></p>
                         <span id="evaluation-<%= recipe.id %>"></span>
                       </div>
@@ -101,7 +103,7 @@
   <% if user_signed_in? %>
     <!--フォローしたユーザーの新着投稿-->
     <div class="col py-5">
-      <h3>フォローユーザーの新着投稿</h3>
+      <h3 style="font-size: calc(20px + 1vw);">フォローユーザーの新着投稿</h3>
       <hr>
     <!--レシピ-->
       <div class="">
@@ -116,7 +118,9 @@
                   <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
                 <% end %>
                 <div class="card-body">
-                  <h5 class="card-title"><%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %></h5>
+                  <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= recipe.title %>">
+                    <%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %>
+                  </h5>
                   <p class="card-text"><%= recipe.contents.truncate(20) %></p>
                   <span id="evaluation-bm-<%= recipe.id %>"></span>
                 </div>
