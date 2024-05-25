@@ -1,8 +1,60 @@
-<%= form_with url:search_path, method: :get, local: true do |f| %>
-  <%= f.text_field :content, class: 'form_control', value: params[:content] %>
-  <%= f.select :model,
-                     options_for_select({'ユーザー'=>'user','レシピ'=>'recipe','アイテム'=>'equipment','ノート'=>'note'}, params[:model]),
-                     class: 'form-control form-control-sm'
-  %>
-  <%= f.submit '検索', class: 'btn btn-primary', name: nil %>
-<% end %>
+<!--<div>-->
+  <!--<%#= form_with url:search_path, method: :get, local: true do |f| %>-->
+  <!--  <%#= f.text_field :content, class: 'form_control', value: params[:content] %>-->
+  <!--  <%#= f.select :model,-->
+  <!--                     options_for_select({'ユーザー'=>'user','レシピ'=>'recipe','アイテム'=>'equipment','ノート'=>'note'}, params[:model]),-->
+  <!--                     class: 'form-control form-control-sm',-->
+  <!--                     id: "search-text"-->
+  <!--  %>-->
+  <!--  <%#= f.submit '検索', class: 'btn btn-primary', name: nil %>-->
+  <!--<%# end %>-->
+<!--</div>-->
+<div id="search-wrap">
+  <div>
+    <%= form_with url:search_path, method: :get, local: true do |f| %>
+      <%= f.text_field :content, class: 'form_control', id: "search-text", value: params[:content], placeholder: "内容を入力" %>
+      <%#= f.select :model,
+                         options_for_select({'ユーザー'=>'user','レシピ'=>'recipe','アイテム'=>'equipment','ノート'=>'note'}, params[:model]),
+                         class: 'form-control form-control-sm',
+                         id: "search-text"
+      %>
+      <%#= f.submit '検索', class: 'btn btn-primary', name: nil, id: "search-text" %>
+    <% end %>
+
+    <!--<form role="search" method="get" action="">-->
+      <!--<input type="text" value="" name="" id="search-text">-->
+    <!--</form>-->
+    <!--search-wrap-->
+  </div>
+</div>
+
+<style>
+  /*========= 検索窓のためのCSS ===============*/
+  /*検索窓のエリア*/
+  #search-wrap {
+    position: absolute;/*絶対配置にして*/
+    z-index: 2;/*最前面に設定。数字は変更可*/
+    top:10px;
+    right:10px;
+  }
+
+  /*テキスト入力input設定*/
+  #search-text{
+    -webkit-appearance:none;/*SafariやChromeのデフォルトの設定を無効*/
+    width: 60px;/*テキスト入力エリアが伸びる前の横幅*/
+    height: 60px;
+    padding: 20px 20px 20px 40px;
+    border: none;
+    background: #fff url("<%= asset_path 'search.png' %>") no-repeat 17px center;/*虫眼鏡アイコンを背景に表示*/
+    background-size: 25px 25px;
+    transition: all 0.5s;/*transitionを使ってスムースに伸ばす*/
+    outline: none;
+    cursor: pointer;/*カーソルを指マークに*/
+  }
+  /*テキスト入力inputにフォーカスした時の形状*/
+  #search-text:focus {
+    width: 200px;/*テキスト入力エリアが伸びる後の横幅*/
+    padding: 20px 0 20px 60px;
+    box-shadow: 0 2px rgba(6,0,1,.26);
+  }
+</style>
