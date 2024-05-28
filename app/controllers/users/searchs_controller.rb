@@ -1,7 +1,7 @@
 class Users::SearchsController < ApplicationController
 
   def search
-    @model = params[:model]
+    # @model = params[:model]
     @content = params[:content]
 
     #ユーザー検索
