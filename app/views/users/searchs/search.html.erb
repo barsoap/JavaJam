@@ -21,7 +21,7 @@
           </a>
         </li>
         <li class="nav-item"><!--アイテムタブ-->
-          <a class="nav-link" data-toggle="tab" href="#section3">
+          <a class="nav-link<%= params[:equipment_sort] ? ' active' : '' %>" data-toggle="tab" href="#section3">
             <i class="fa-solid fa-kitchen-set"></i>
           </a>
         </li>
@@ -59,7 +59,7 @@
                             ['投稿新しい順', 'recipe_latest'],
                             ['投稿古い順', 'recipe_oldest'],
                             ['評価順', 'evaluation'],
-                            ['ブックマークの多い順', 'redipe_bookmark']
+                            ['ブックマークの多い順', 'recipe_bookmark']
                           ], params[:recipe_sort]),
                           {
                             include_blank: '並び替え',

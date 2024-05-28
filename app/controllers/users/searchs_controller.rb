@@ -14,7 +14,7 @@ class Users::SearchsController < ApplicationController
       @recipes = Recipe.search_for(@content).order(created_at: :asc)
     when 'evaluation'
       @recipes = Recipe.search_for(@content).order(evaluation: :desc)
-    when 'redipe_bookmark'
+    when 'recipe_bookmark'
       @recipes = Recipe.search_for(@content).sort {|a,b| b.recipe_bookmarks.size <=> a.recipe_bookmarks.size}
     else
       @recipes = Recipe.search_for(@content).order(created_at: :desc)
