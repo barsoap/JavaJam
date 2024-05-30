@@ -9,7 +9,7 @@ class Users::HomesController < ApplicationController
     #   .group('users.id')
     #   .order('followers_count DESC')
     #   .limit(4)
-    @users = User.all.limit(4)
+    @users = User.order(created_at: :desc).where.not(email: 'guest@example.com').limit(4)
   end
 
   private
