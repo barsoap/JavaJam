@@ -1,0 +1,23 @@
+<% recipe.recipe_comments.each do |comment| %>
+  <div class="row py-3">
+    <div class="col-lg-1"><!--ユーザーアイコン-->
+      <%= link_to (image_tag comment.user.get_profile_image(40,40), class: 'rounded-circle img-fluid d-block'), user_path(comment.user_id) %>
+    </div>
+    <div class="col-lg-11"><!--コメント表示の右側-->
+      <div><!--ユーザーネーム-->
+          <%= link_to (comment.user.name), user_path(comment.user_id), class: 'text-dark font-weight-bold' %>
+      </div>
+      <div class="text-black-50">
+        <%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分')%>
+      </div>
+      <div class="text-break"><!--コメント内容-->
+        <%= simple_format(comment.contents, sanitize: true, class: 'm-0') %>
+        <% if comment.user == current_user %>
+          <div><!--コメント投稿者だったら削除ボタン-->
+            <%= link_to '削除する', recipe_recipe_comment_path(comment.recipe.id, comment.id), method: :delete, class: 'btn btn-outline-warning btn-sm', remote: true %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

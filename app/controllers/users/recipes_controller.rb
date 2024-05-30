@@ -14,6 +14,13 @@ class Users::RecipesController < ApplicationController
         @recipes = Recipe.page(params[:page]).per(12).order(created_at: :asc)
       when 'evaluation'
         @recipes = Recipe.page(params[:page]).per(12).order(evaluation: :desc)
+      when 'bookmark'
+        @recipes = Recipe
+                 .left_joins(:recipe_bookmarks)
+                 .group(:id)
+                 .order('COUNT(recipe_bookmarks.id) DESC')
+                 .page(params[:page])
+                 .per(12)
       else
         @recipes = Recipe.page(params[:page]).per(12).order(created_at: :desc)
       end

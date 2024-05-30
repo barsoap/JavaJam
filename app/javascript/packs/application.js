@@ -34,3 +34,10 @@ ActiveStorage.start()
 
 require("trix")
 require("@rails/actiontext")
+
+// BootstrapのTooltipを使う
+import { Tooltip } from "bootstrap";
+$.fn.tooltip = Tooltip._jQueryInterface;
+$(function() {
+  $('[data-toggle="tooltip"]').tooltip();
+})

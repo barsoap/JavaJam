@@ -8,7 +8,9 @@
           <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
         <% end %>
         <div class="card-body">
-          <h5 class="card-title"><%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %></h5>
+          <h5 class="card-title"  data-toggle="tooltip" data-placement="top" title="<%= recipe.title %>">
+            <%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %>
+          </h5>
           <p class="card-text"><%= recipe.contents.truncate(20) %></p>
           <span id="evaluation-<%= recipe.id %>"></span>
         </div>

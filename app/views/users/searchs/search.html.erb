@@ -21,7 +21,7 @@
           </a>
         </li>
         <li class="nav-item"><!--アイテムタブ-->
-          <a class="nav-link" data-toggle="tab" href="#section3">
+          <a class="nav-link<%= params[:equipment_sort] ? ' active' : '' %>" data-toggle="tab" href="#section3">
             <i class="fa-solid fa-kitchen-set"></i>
           </a>
         </li>
@@ -34,7 +34,7 @@
 
       <div class="tab-content">
         <!--セクション1(ユーザー)-->
-        <div id="section1" class="tab-pane fade py-3<%= params[:recipe_sort].blank? ? ' show active' : '' %>">
+        <div id="section1" class="tab-pane fade py-3<%= params[:recipe_sort].blank? && params[:equipment_sort].blank? ? ' show active' : '' %>">
           <!--検索結果があるとき-->
           <% if @users.present? %>
             <%= render 'users/users/index', users: @users %>
@@ -59,7 +59,7 @@
                             ['投稿新しい順', 'recipe_latest'],
                             ['投稿古い順', 'recipe_oldest'],
                             ['評価順', 'evaluation'],
-                            ['ブックマークの多い順', 'redipe_bookmark']
+                            ['ブックマークの多い順', 'recipe_bookmark']
                           ], params[:recipe_sort]),
                           {
                             include_blank: '並び替え',
@@ -78,7 +78,7 @@
           <% end %>
         </div>
         <!--セクション3(アイテム)-->
-        <div id="section3" class="tab-pane fade py-3">
+        <div id="section3" class="tab-pane fade py-3<%= params[:equipment_sort] ? ' show active' : '' %>">
           <!--検索結果があるとき-->
           <% if @equipments.present? %>
             <!--ソート-->
