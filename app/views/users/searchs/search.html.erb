@@ -1,23 +1,129 @@
-<div class="container mt-4 py-5">
+<div class="container py-5">
 
-    <!--検索結果を表示-->
-    <% if @model == 'user'%>
-      <h3 class="mb-3">ユーザー検索結果： <%= @content %></h3>
-      <hr>
-      <%= render 'users/users/index', users: @records %>
-    <% elsif @model == 'recipe' %>
-      <h3 class="mb-3">レシピ検索結果： <%= @content %></h3>
-      <hr>
-      <%= render 'users/recipes/index', recipes: @records %>
-    <% elsif @model == 'equipment' %>
-      <h3 class="mb-3">アイテム検索結果： <%= @content %></h3>
-      <hr>
-      <%= render 'users/equipments/index', equipments: @records %>
-    <% else %>
-      <h3 class="mb-3">ノート一覧： <%= @content %></h3>
-      <hr>
-      <%= render 'users/notes/index', notes: @records %>
-    <% end %>
+  <!--検索結果を表示-->
+  <div class="d-flex flex-column">
+    <div class="pb-2">
+      <h5>
+        "<%= @content %>"での検索結果
+      </h5>
+    </div>
+    <!--タブ-->
+    <div class="tabs">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><!--ユーザータブ-->
+          <a class="nav-link<%= params[:recipe_sort].blank? && params[:equipment_sort].blank? ? ' active' : '' %>" data-toggle="tab" href="#section1">
+            <i class="fa-solid fa-users"></i>
+          </a>
+        </li>
+        <li class="nav-item"><!--レシピタブ-->
+          <a class="nav-link<%= params[:recipe_sort] ? ' active' : '' %>" data-toggle="tab" href="#section2">
+            <i class="fa-solid fa-mug-hot"></i>
+          </a>
+        </li>
+        <li class="nav-item"><!--アイテムタブ-->
+          <a class="nav-link<%= params[:equipment_sort] ? ' active' : '' %>" data-toggle="tab" href="#section3">
+            <i class="fa-solid fa-kitchen-set"></i>
+          </a>
+        </li>
+        <li class="nav-item"><!--ノートタブ-->
+          <a class="nav-link" data-toggle="tab" href="#section4">
+            <i class="fa-solid fa-book-open"></i>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <!--セクション1(ユーザー)-->
+        <div id="section1" class="tab-pane fade py-3<%= params[:recipe_sort].blank? && params[:equipment_sort].blank? ? ' show active' : '' %>">
+          <!--検索結果があるとき-->
+          <% if @users.present? %>
+            <%= render 'users/users/index', users: @users %>
+          <!--検索結果がないとき-->
+          <% else %>
+            <div class="text-center mt-5 text-muted">
+              <h4 class="mt-3">No users have been found</h4>
+              <i class="fa-regular fa-face-sad-tear fa-4x"></i>
+            </div>
+          <% end %>
+        </div>
+        <!--セクション2(レシピ)-->
+        <div id="section2" class="tab-pane fade py-3<%= params[:recipe_sort] ? ' show active' : '' %>">
+          <!--検索結果があるとき-->
+          <% if @recipes.present? %>
+            <!--ソート-->
+            <%= form_tag(search_path, method: :get) do %>
+              <%= hidden_field_tag :content, params[:content] %>
+              <%= select_tag :recipe_sort,
+                        options_for_select(
+                          [
+                            ['投稿新しい順', 'recipe_latest'],
+                            ['投稿古い順', 'recipe_oldest'],
+                            ['評価順', 'evaluation'],
+                            ['ブックマークの多い順', 'recipe_bookmark']
+                          ], params[:recipe_sort]),
+                          {
+                            include_blank: '並び替え',
+                            class: 'form-control mb-3',
+                            onchange: 'submit(this.form)'
+                          }
+              %>
+            <% end %>
+            <%= render 'users/recipes/index', recipes: @recipes %>
+          <!--検索結果がないとき-->
+          <% else %>
+            <div class="text-center mt-5 text-muted">
+              <h4 class="mt-3">No recipes have been found</h4>
+              <i class="fa-regular fa-face-sad-tear fa-4x"></i>
+            </div>
+          <% end %>
+        </div>
+        <!--セクション3(アイテム)-->
+        <div id="section3" class="tab-pane fade py-3<%= params[:equipment_sort] ? ' show active' : '' %>">
+          <!--検索結果があるとき-->
+          <% if @equipments.present? %>
+            <!--ソート-->
+            <%= form_tag(search_path, method: :get) do %>
+              <%= hidden_field_tag :content, params[:content] %>
+              <%= select_tag :equipment_sort,
+                        options_for_select(
+                          [
+                            ['投稿新しい順', 'equipment_latest'],
+                            ['投稿古い順', 'equipment_oldest'],
+                            ['評価順', 'evaluation']
+                          ], params[:equipment_sort]),
+                          {
+                            include_blank: '並び替え',
+                            class: 'form-control mb-3',
+                            onchange: 'submit(this.form)'
+                          }
+              %>
+            <% end %>
+            <%= render 'users/equipments/index', equipments: @equipments %>
+          <!--検索結果がないとき-->
+          <% else %>
+            <div class="text-center mt-5 text-muted">
+              <h4 class="mt-3">No items have been found</h4>
+              <i class="fa-regular fa-face-sad-tear fa-4x"></i>
+            </div>
+          <% end %>
+        </div>
+        <!--セクション4(ノート)-->
+        <div id="section4" class="tab-pane fade py-3">
+          <!--検索結果があるとき-->
+          <% if @notes.present? %>
+            <%= render 'users/notes/index', notes: @notes %>
+          <!--検索結果がないとき-->
+          <% else %>
+            <div class="text-center mt-5 text-muted">
+              <h4 class="mt-3">No notes have been found</h4>
+              <i class="fa-regular fa-face-sad-tear fa-4x"></i>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 

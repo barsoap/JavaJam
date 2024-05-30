@@ -15,7 +15,7 @@
           </div>
         <% end %>
         <% if user_signed_in? %>
-          <div id="follow-btn" class="mt-3 text-center">
+          <div id="follow-btn_<%= @user.id %>" class="mt-3 text-center">
             <%= render 'users/follows/btn', user: @user %>
           </div>
         <% end %>
@@ -40,16 +40,26 @@
     </div>
     <!--右側/ユーザー投稿一覧-->
     <div class="col-lg-8">
+      <!--タブ-->
       <div class="tabs">
         <ul class="nav nav-tabs pt-3 pt-lg-0">
+          <!--レシピタブ-->
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#section1">レシピ</a>
+            <a class="nav-link active" data-toggle="tab" href="#section1">
+              <i class="fa-solid fa-mug-hot"></i>
+            </a>
           </li>
+          <!--アイテム-->
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#section2">アイテム</a>
+            <a class="nav-link" data-toggle="tab" href="#section2">
+              <i class="fa-solid fa-kitchen-set"></i>
+            </a>
           </li>
+          <!--ノートタブ-->
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#section3">ノート</a>
+            <a class="nav-link" data-toggle="tab" href="#section3">
+              <i class="fa-solid fa-book-open"></i>
+            </a>
           </li>
         </ul>
 
@@ -152,7 +162,7 @@
                     <% end %>
                     <div class="card-body">
                       <h5 class="card-title"><%= link_to note.title.truncate(10), note_path(note.id) %></h5>
-                      <p class="card-text"><%= note.contents.truncate(20) %></p>
+                      <p class="card-text"><%= note.contents.to_plain_text.truncate(20) %></p>
                     </div>
                     <div class="card-footer text-right">
                       <small class="text-black-50">

@@ -8,8 +8,10 @@
           <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), note_path(note.id) %>
         <% end %>
         <div class="card-body">
-          <h5 class="card-title"><%= link_to note.title.truncate(10), note_path(note.id) %></h5>
-          <p class="card-text"><%= note.contents.truncate(20) %></p>
+          <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= note.title %>">
+            <%= link_to note.title.truncate(10), note_path(note.id) %>
+          </h5>
+          <p class="card-text"><%= note.contents.to_plain_text.truncate(20) %></p>
         </div>
         <div class="card-footer text-right">
           <small class="text-black-50">

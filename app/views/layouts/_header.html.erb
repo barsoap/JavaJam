@@ -1,7 +1,7 @@
 <header class="position-fixed w-100">
-  <!--管理者ログインしてないとき-->
+  <!--管理者/ユーザーログインしてないとき-->
   <% unless admin_signed_in? %>
-    <nav class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
+    <nav class="d-flex flex-column justify-content-center align-items-start align-items-md-center pl-3 pl-md-0 w-100 h-100">
       <a href="<%= root_path %>"><%= image_tag 'logo_white_s.png', class: 'logo' %></a>
       <ul class="d-flex list-unstyled m-0 menu__basic">
         <li><%= link_to 'レシピ', recipes_path, class: "text-decoration-none #{controller_name == 'recipes' || controller_name == 'recipe_bookmarks' ? 'font-weight-bold' : 'text-ivory'}" %></li>

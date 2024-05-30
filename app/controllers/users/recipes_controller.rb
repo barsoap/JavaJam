@@ -14,6 +14,13 @@ class Users::RecipesController < ApplicationController
         @recipes = Recipe.page(params[:page]).per(12).order(created_at: :asc)
       when 'evaluation'
         @recipes = Recipe.page(params[:page]).per(12).order(evaluation: :desc)
+      when 'bookmark'
+        @recipes = Recipe
+                 .left_joins(:recipe_bookmarks)
+                 .group(:id)
+                 .order('COUNT(recipe_bookmarks.id) DESC')
+                 .page(params[:page])
+                 .per(12)
       else
         @recipes = Recipe.page(params[:page]).per(12).order(created_at: :desc)
       end
@@ -34,11 +41,15 @@ class Users::RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
-    if @recipe.save
-      @recipe.save_tags(params[:recipe][:tags]) if params[:recipe][:tags].present?
-      redirect_to recipe_path(@recipe)
-    else
-      render :new
+
+    # トランザクション
+    ActiveRecord::Base.transaction do
+      if @recipe.save
+        @recipe.save_tags(params[:recipe][:tags]) if params[:recipe][:tags].present?
+        redirect_to recipe_path(@recipe)
+      else
+        render :new
+      end
     end
   end
 
@@ -48,11 +59,15 @@ class Users::RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.find(params[:id])
-    if @recipe.update(recipe_params)
-      @recipe.save_tags(params[:recipe][:tags]) if params[:recipe][:tags].present?
-      redirect_to recipe_path(@recipe)
-    else
-      render :edit
+
+    # トランザクション
+    ActiveRecord::Base.transaction do
+      if @recipe.update(recipe_params)
+        @recipe.save_tags(params[:recipe][:tags]) if params[:recipe][:tags].present?
+        redirect_to recipe_path(@recipe)
+      else
+        render :edit
+      end
     end
   end
 
