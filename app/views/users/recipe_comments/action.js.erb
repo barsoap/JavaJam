@@ -1,0 +1,6 @@
+$('#comment_count').html('<%= @recipe.recipe_comments.count %>件')
+$('#comments').html('<%= j(render 'users/recipes/comments', recipe: @recipe) %>')
+
+<% if action_name == "create" %>
+  $('#recipe_comment_contents').val('')
+<% end %>

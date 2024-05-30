@@ -15,7 +15,7 @@
           </div>
         <% end %>
         <% if user_signed_in? %>
-          <div id="follow-btn" class="mt-3 text-center">
+          <div id="follow-btn_<%= @user.id %>" class="mt-3 text-center">
             <%= render 'users/follows/btn', user: @user %>
           </div>
         <% end %>

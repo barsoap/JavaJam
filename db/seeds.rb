@@ -12,7 +12,7 @@ end
 
 users = [
   {email: 'user1@example.com', password: 'user1@example.com', name: 'コーヒー大好き', profile: "コーヒー大好きさん\n豆にはこだわりを。"},
-  {email: 'user2@example.com', password: 'user2@example.com', name: 'ハンドドリップ', profile: "ハンドドリップ大好きさん\n最近ハマってるです。"},
+  {email: 'user2@example.com', password: 'user2@example.com', name: 'ハンドドリップ', profile: "ハンドドリップ大好きさん\n最近ハマってます。"},
 ]
 
 users.each do |user|

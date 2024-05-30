@@ -11,7 +11,7 @@
     <div class="tabs">
       <ul class="nav nav-tabs">
         <li class="nav-item"><!--ユーザータブ-->
-          <a class="nav-link<%= params[:recipe_sort].blank? && params[:equipment_sort].blank? ? ' active' : '' %>" data-toggle="tab" href="#section1"><!--修正必要箇所-->
+          <a class="nav-link<%= params[:recipe_sort].blank? && params[:equipment_sort].blank? ? ' active' : '' %>" data-toggle="tab" href="#section1">
             <i class="fa-solid fa-users"></i>
           </a>
         </li>
@@ -78,7 +78,7 @@
           <% end %>
         </div>
         <!--セクション3(アイテム)-->
-        <div id="section3" class="tab-pane fade py-3<%= params[:equipment_sort] ? ' show active' : '' %>"><!--修正必要箇所-->
+        <div id="section3" class="tab-pane fade py-3<%= params[:equipment_sort] ? ' show active' : '' %>">
           <!--検索結果があるとき-->
           <% if @equipments.present? %>
             <!--ソート-->

@@ -106,50 +106,76 @@
       <h3 style="font-size: calc(20px + 1vw);">フォローユーザーの新着投稿</h3>
       <hr>
     <!--レシピ-->
+    <% if @follows.present? %>     <!--修正必要箇所-->
       <div class="">
         <h4><i class="fa-solid fa-mug-hot"></i> 新規レシピ</h4>
           <div class="row">
-          <% @bm_recipes.each do |recipe| %>
-            <div class="col-md-6 col-lg-4 mb-3">
-              <div class="card">
-                <% if recipe.recipe_image.attached? %>
-                  <%= link_to (image_tag recipe.recipe_image, class: 'img-fluid note-img'), recipe_path(recipe.id) %>
-                <% else %>
-                  <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
-                <% end %>
-                <div class="card-body">
-                  <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= recipe.title %>">
-                    <%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %>
-                  </h5>
-                  <p class="card-text"><%= recipe.contents.truncate(20) %></p>
-                  <span id="evaluation-bm-<%= recipe.id %>"></span>
-                </div>
-                <div class="card-footer text-right">
-                  <small class="text-black-50">
-                    <%= recipe.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %>
-                  </small>
+            <% @bm_recipes.each do |recipe| %>
+              <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card">
+                  <% if recipe.recipe_image.attached? %>
+                    <%= link_to (image_tag recipe.recipe_image, class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+                  <% else %>
+                    <%= link_to (image_tag 'top/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg', class: 'img-fluid note-img'), recipe_path(recipe.id) %>
+                  <% end %>
+                  <div class="card-body">
+                    <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= recipe.title %>">
+                      <%= link_to recipe.title.truncate(10), recipe_path(recipe.id) %>
+                    </h5>
+                    <p class="card-text"><%= recipe.contents.truncate(20) %></p>
+                    <span id="evaluation-bm-<%= recipe.id %>"></span>
+                  </div>
+                  <div class="card-footer text-right">
+                    <small class="text-black-50">
+                      <%= recipe.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分') %>
+                    </small>
+                  </div>
                 </div>
               </div>
-            </div>
-            <script>
-              $(document).ready(function(){
-                var elem = document.querySelector('#evaluation-bm-<%= recipe.id %>');
-                if (elem == null) return;
+              <script>
+                $(document).ready(function(){
+                  var elem = document.querySelector('#evaluation-bm-<%= recipe.id %>');
+                  if (elem == null) return;
 
-                elem.innerHTML = ""
-                raty(elem, {
-                  starOn: "<%= asset_path('raty/star-on.png') %>",
-                  starOff: "<%= asset_path('raty/star-off.png') %>",
-                  starHalf: "<%= asset_path('raty/star-half.png') %>",
-                  score: "<%= recipe.evaluation %>",
-                  half: true,
-                  readOnly: true
+                  elem.innerHTML = ""
+                  raty(elem, {
+                    starOn: "<%= asset_path('raty/star-on.png') %>",
+                    starOff: "<%= asset_path('raty/star-off.png') %>",
+                    starHalf: "<%= asset_path('raty/star-half.png') %>",
+                    score: "<%= recipe.evaluation %>",
+                    half: true,
+                    readOnly: true
+                  });
                 });
-              });
-            </script>
-          <% end %>
+              </script>
+            <% end %>
           </div>
-      </div>
+        </div>
+      <% else %>
+        <div>
+          <h4 class="pt-3" id="marker__white">お気に入りのユーザーを見つけよう</h4>
+          <!--カードでユーザー表示-->
+          <div class="row">
+            <% @users.each do |user| %>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= link_to (image_tag user.get_profile_image(35, 35), class: 'rounded-circle img-fluid'), user_path(user) %>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><%= link_to user.name, user_path(user) %></h6>
+                    <p class="card-text"><%= user.profile %></p>
+                    <div id="follow-btn_<%= user.id %>">
+                      <%= render 'users/follows/btn', user: user %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
     </div>
   <% else %>
   <!--新規登録のリンク-->

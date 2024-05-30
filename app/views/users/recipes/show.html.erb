@@ -79,39 +79,17 @@
   <div class="py-5 ">
     <!-- コメント一覧-->
     <% if @recipe.recipe_comments.present? %>
-      <h5 class="text-black-50 text-center border-top py-5"><i class="fa-regular fa-comment"></i>コメント (<small><%= @recipe.recipe_comments.count %>件</small>)</h5>
+      <h5 class="text-black-50 text-center border-top py-5"><i class="fa-regular fa-comment"></i>コメント (<small id="comment_count"><%= @recipe.recipe_comments.count %>件</small>)</h5>
 
-      <div class="col-md-10 mx-auto">
-        <% @recipe.recipe_comments.each do |comment| %>
-          <div class="row py-3">
-            <div class="col-lg-1"><!--ユーザーアイコン-->
-              <%= link_to (image_tag comment.user.get_profile_image(40,40), class: 'rounded-circle img-fluid d-block'), user_path(comment.user_id) %>
-            </div>
-            <div class="col-lg-11"><!--コメント表示の右側-->
-              <div><!--ユーザーネーム-->
-                  <%= link_to (comment.user.name), user_path(comment.user_id), class: 'text-dark font-weight-bold' %>
-              </div>
-              <div class="text-black-50">
-                <%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H時%M分')%>
-              </div>
-              <div class="text-break"><!--コメント内容-->
-                <%= simple_format(comment.contents, sanitize: true, class: 'm-0') %>
-                <% if comment.user == current_user %>
-                  <div><!--コメント投稿者だったら削除ボタン-->
-                    <%= link_to '削除する', recipe_recipe_comment_path(comment.recipe.id, comment.id), method: :delete, class: 'btn btn-outline-warning btn-sm' %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+      <div id="comments" class="col-md-10 mx-auto">
+        <%= render 'users/recipes/comments', recipe: @recipe %>
       </div>
 
     <% end %>
 
     <!--コメント投稿-->
     <% if user_signed_in? %>
-      <%= form_with model:[@recipe, @recipe_comment] do |f| %>
+      <%= form_with model:[@recipe, @recipe_comment], local: false do |f| %>
         <div class="col-10 offset-2 mx-auto">
           <div class="form-group pt-5">
             <%= f.text_area :contents, class: 'form-control', placeholder: "コメントを入力", rows: 4 %>
